@@ -1,0 +1,29 @@
+﻿@model Avans.GameNight.App.Models.LoginModel
+@{
+    ViewData["Title"] = "Login";
+    
+}
+<h1 style="color:black">Login</h1>
+<hr style="background-color:white;color:white" />
+
+
+
+<div class="container">
+    <form class="form-group" asp-action="Login" method="post">
+        <div>
+            <label >Email: </label>
+            <input class="form-control" name="Email" type="email"   />
+        </div>
+
+
+
+       <div>
+            <label >Password: </label>
+            <input class="form-control" name="Password" type="password" />
+        </div>
+
+
+
+       <button type="submit" class="btn btn-info" style="background-color: #E0B72D; color: black; margin-top: 20px">Login</button>
+    </form>
+</div>
