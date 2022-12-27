@@ -1,0 +1,107 @@
+﻿@model Avans.GameNight.App.Models.BoardGameNight
+@using Avans.GameNight.App.Models
+@{
+    ViewData["Title"] = "Create";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Create</h1>
+
+<h4>BoardGameNight</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="NameNight" class="control-label"></label>
+                <input asp-for="NameNight" class="form-control" />
+                <span asp-validation-for="NameNight" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+              @*  <label asp-for="Host" class="control-label"></label>*@
+                <input asp-for="Host" class="form-control" hidden/>
+                <span asp-validation-for="Host" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+             @*   <label asp-for="TotalPlayers" class="control-label"></label>*@
+                <input asp-for="TotalPlayers" class="form-control" hidden/>
+                <span asp-validation-for="TotalPlayers" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="MaxPlayers" class="control-label"></label>
+                <input asp-for="MaxPlayers" class="form-control" />
+                <span asp-validation-for="MaxPlayers" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="DateTime" class="control-label"></label>
+                <input asp-for="DateTime" class="form-control" />
+                <span asp-validation-for="DateTime" class="text-danger"></span>
+            </div>
+         @*
+            <div class="form-group">
+                <label asp-for="Boardgames" class="control-label"></label>
+                 <select asp-for="Boardgames" class="form-control" asp-items="new SelectList(ViewBag.BoardGamesList)">
+                    <option selected="selected" >Please select</option>
+                     @foreach (BoardGame item in ViewBag.BoardGamesList)
+                    {
+                        <option value="@item.NameGame" >@item.NameGame</option>
+                    }
+                </select>
+                <span asp-validation-for="Boardgames" class="text-danger"></span>
+            </div>*@
+
+@*
+            <div class="form-group">
+                <label asp-for="Boardgames" class="control-label"></label>
+                 <select required asp-for="Boardgames" class="form-control">
+                   <option selected="selected" >Please select</option>
+                    @foreach (BoardGame item in ViewBag.BoardGamesList)
+                    {
+                        <option value="@item.NameGame" >@item.NameGame</option>
+                    }
+                </select>
+                <span asp-validation-for="Boardgames" class="text-danger"></span>
+            </div>*@
+
+            <div class="form-group">
+                <label asp-for="Adress" class="control-label"></label>
+                <input asp-for="Adress" class="form-control" />
+                <span asp-validation-for="Adress" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Food" class="control-label"></label>
+                <input asp-for="Food" class="form-control" />
+                <span asp-validation-for="Food" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Drink" class="control-label"></label>
+                <input asp-for="Drink" class="form-control" />
+                <span asp-validation-for="Drink" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+              
+                <input asp-for="Ratings" class="form-control" hidden/>
+                <span asp-validation-for="Ratings" class="text-danger"></span>
+            </div>
+              <br />
+            <div class="form-group form-check">
+                <label class="form-check-label">
+                    <input class="form-check-input" asp-for="Mature" /> 18+
+                </label>
+            </div>
+            <br />
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" style="background-image: url('https://wallpaperaccess.com/full/3405912.jpg'); border-color:  hsl(32, 45%, 25%);"  />
+            </div>
+        </form>
+    </div>
+</div>
+<br />
+<div>
+       <a  asp-area="" asp-controller="BoardGameNight" asp-action="Index"><input type="submit" value="Back to list" class="btn btn-primary" style="background-image: url('https://wallpaperaccess.com/full/3405912.jpg'); border-color:  hsl(32, 45%, 25%);"  /></a> 
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

@@ -17,7 +17,7 @@ namespace Avans.GameNight.Infrastructure.EntityFramework.DataContext
         }
 
         public DbSet<BoardGame> BoardGame { get; set; }
-        public DbSet<Avans.GameNight.App.Models.BoardGameNight> BoardGameNight { get; set; }
+        public DbSet<BoardGameNight> BoardGameNight { get; set; }
         public DbSet<Player> Player { get; set; }
         public DbSet<Rating> Rating { get; set; }
 

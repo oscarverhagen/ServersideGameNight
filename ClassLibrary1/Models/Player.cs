@@ -24,15 +24,20 @@ namespace Avans.GameNight.App.Models
             get { return _birthDate; }
             set
             {
-                if (value > DateTime.Today)
+              
+                if ((DateTime.Today.Year - value.Year) >= 18)
                 {
-                    throw new ArgumentException("Birthdate of a patient cannot be in the future", "BirtDate");
+                    Mature = true;
+                    role = Role.HOST;
+                    _birthDate = value;
                 }
-                if ((DateTime.Today.Year - value.Year) < 16)
+                else
                 {
-                    throw new ArgumentException("Minimal age is 16", "BirtDate");
+                    Mature = false;
+                    role = Role.PLAYER;
+                    _birthDate = value;
                 }
-                _birthDate = value;
+               
             }
         }
 
@@ -48,6 +53,6 @@ namespace Avans.GameNight.App.Models
         public string FoodPreference { get; set; }
         public int NotShow { get; set; }
 
-
+        public IList<BoardGameNightPlayer> BoardGameNightPlayer { get; set; }
     }
 }

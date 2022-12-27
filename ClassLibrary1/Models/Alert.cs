@@ -7,7 +7,7 @@ namespace Avans.GameNight.App.Models
 {
     public enum Alert
     {
-       lactoseAllergie, NutAllergie, Vegatarian, NonAlcohol
+       lactoseAllergie, NutAllergie, Vegatarian, NonAlcohol, None
   
 
 

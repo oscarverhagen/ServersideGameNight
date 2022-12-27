@@ -1,6 +1,7 @@
-﻿using Avans.BoardGameNight.Core.DomainServices.Interfaces;
+﻿using Avans.GameNight.Core.DomainServices.Interfaces;
 using Avans.GameNight.App.Models;
 using Microsoft.AspNetCore.Identity;
+
 
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
@@ -66,8 +67,21 @@ namespace Avans.GameNight.App.Controllers
             }
        
         [HttpPost]
-        public async Task<IActionResult> Register(RegisterModel registerModel, Player player)
+        public async Task<IActionResult> Register(RegisterModel registerModel)
         {
+            if (registerModel.BirthDate > DateTime.Today)
+            {
+                ModelState.AddModelError(string.Empty, "Birthday cannot be in the future!");
+                return View();
+            };
+
+            if (DateTime.Today.Year - registerModel.BirthDate.Year < 16)
+            {
+                ModelState.AddModelError(string.Empty, "You have to be 16+!");
+                return View();
+            };
+         
+
             if (!registerModel.Password.Equals(registerModel.ConfirmPassword))
             {
                 ModelState.AddModelError(string.Empty, "Password don't match");
@@ -80,29 +94,32 @@ namespace Avans.GameNight.App.Controllers
                 UserName = registerModel.UserName,
                 Email = registerModel.Email,
                 
-                
+                 
             };
-            player = new Player
+           var player = new Player
             {
                 Name = registerModel.UserName,
                 MailAdress = registerModel.Email,
                 BirthDate = registerModel.BirthDate,
-                role = Role.PLAYER,
-                Adress = "Empty",
-                FoodPreference = "Empty",
-                DrinkPreference = "Empty",
-                City = "Empty",
+            
+                alert = Alert.None,
+               Adress = " ",
+               FoodPreference = " ",
+               DrinkPreference = " ",
+               City = " ",
 
 
-            };
+           };
+            
+
             //if (ModelState.IsValid)
             //{
-                
-              try {
+
+            try {
                 await _playerRepo.AddPlayer(player); 
             }catch(Exception ex)
             {
-                ModelState.AddModelError("werkt nie!", ex.Message);
+                ModelState.AddModelError("InvalidStateModel", ex.Message);
             }
             //}
 
@@ -113,6 +130,10 @@ namespace Avans.GameNight.App.Controllers
             var userCreationResult = await _userManager.CreateAsync(user, registerModel.Password);
             if (!userCreationResult.Succeeded)
             {
+               
+
+
+
                 foreach (var error in userCreationResult.Errors)
                     ModelState.AddModelError(string.Empty, error.Description);
                 return View();

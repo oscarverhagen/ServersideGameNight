@@ -33,14 +33,15 @@ namespace Avans.GameNight.App.Models
             get { return _birthDate; }
             set
             {
-                if (value > DateTime.Today)
-                {
-                    throw new ArgumentException("Birthdate of a user cannot be in the future", "BirthDate");
-                }
-                if ((DateTime.Today.Year - value.Year) < 16)
-                {
-                    throw new ArgumentException("Minimal age is 16", "BirthDate");
-                }
+                //if (value > DateTime.Today)
+                //{
+                //    throw new ArgumentException("Birthdate of a user cannot be in the future", "BirthDate");
+                //}
+                //if ((DateTime.Today.Year - value.Year) < 16)
+                //{
+                //    throw new ArgumentException("Minimal age is 16", "BirthDate");
+                //}
+              
                 _birthDate = value;
             }
         }
