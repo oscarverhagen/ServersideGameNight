@@ -20,11 +20,20 @@
     </PackageReference>
     <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="6.0.0" />
     <PackageReference Include="Microsoft.Extensions.Logging" Version="6.0.0" />
+    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="6.0.10" />
+    <PackageReference Include="Swashbuckle.AspNetCore" Version="6.3.0" />
   </ItemGroup>
 
   <ItemGroup>
-   
+  
+    <ProjectReference Include="..\Avans.GameNight.Core.DomainServices\Avans.GameNight.Core.DomainServices.csproj" />
+  
     <ProjectReference Include="..\Avans.GameNight.Infrastructure.EntityFramework\Avans.GameNight.Infrastructure.EntityFramework.csproj" />
+  
+    <ProjectReference Include="..\ClassLibrary1\Avans.GameNight.Core.Domain.csproj" />
+  
+ 
+    
   </ItemGroup>
 
 </Project>

@@ -1,0 +1,119 @@
+﻿@model IEnumerable<Avans.GameNight.App.Models.BoardGameNight>
+@using Avans.GameNight.App.Models
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Join Game</h1>
+
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.NameNight)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Host)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.TotalPlayers)
+            </th>
+             <th>
+                Players:
+            </th>
+
+              <th>
+                BoardGames:
+            </th>
+         
+            <th>
+                @Html.DisplayNameFor(model => model.MaxPlayers)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DateTime)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Adress)
+            </th>
+             <th>
+               @* @Html.DisplayNameFor(model => model.Mature)*@
+               18+
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Food)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Drink)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Ratings)
+            </th>
+
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.NameNight)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Host)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TotalPlayers)
+            </td>
+            <td>
+                 @foreach (Player a in ViewBag.Players)
+                    {
+                          @Html.DisplayFor(modelItem => @a.Name)
+                          <br />
+                    }
+              
+            </td>
+
+             <td>
+                 @foreach (BoardGame a in ViewBag.BoardGamesList)
+                    {
+                          @Html.DisplayFor(modelItem => @a.NameGame)
+                          <br />
+                    }
+              
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.MaxPlayers)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DateTime)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Adress)
+            </td>
+              <td>
+                @Html.DisplayFor(modelItem => item.Mature)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Food)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Drink)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Ratings)
+            </td>
+            <td>
+                <a  asp-area="" asp-controller="BoardGameNight" asp-action="Index"><input type="submit" value="Join" class="btn btn-primary" style="background-image: url('https://wallpaperaccess.com/full/3405912.jpg'); border-color:  hsl(32, 45%, 25%);"  /></a> 
+               
+             @* | <a  asp-area="" asp-controller="Player" asp-action="Details"><input type="submit" value="Delete" class="btn btn-primary" /></a>*@
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
+
+    <p>
+     <a  asp-area="" asp-controller="BoardGameNight" asp-action="Create"><input type="submit" value="Create New" class="btn btn-primary"style="background-image: url('https://wallpaperaccess.com/full/3405912.jpg'); border-color:  hsl(32, 45%, 25%);"  /></a> 
+</p>

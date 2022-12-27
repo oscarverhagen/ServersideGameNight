@@ -1,5 +1,5 @@
 
-using Avans.BoardGameNight.Core.DomainServices.Interfaces;
+using Avans.GameNight.Core.DomainServices.Interfaces;
 using Avans.GameNight.Infrastructure.EntityFramework.DataContext;
 using Avans.GameNight.Infrastructure.EntityFramework.Repository;
 using Microsoft.AspNetCore.Identity;
@@ -11,6 +11,8 @@ var builder = WebApplication.CreateBuilder(args);
 
 
 // Add services to the container.
+builder.Services.AddScoped<IBoardGameNightRepository, BoardGameNightRepository>();
+builder.Services.AddScoped<IBoardGameRepository, BoardGameRepository>();
 builder.Services.AddScoped<IPlayerRepository, PlayerRepository>();
 builder.Services.AddControllersWithViews();
 builder.Services.AddDbContext<AppDbContext>(options => options.UseSqlServer(
