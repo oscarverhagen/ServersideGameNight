@@ -57,6 +57,8 @@ namespace Avans.GameNight.App.Controllers
                 var user = await _userManager.GetUserAsync(User);
                 var boardGames = await _boardGameRepo.GetBoardGames();
                 var BoardGameNight = await _boardGameNightRepo.GetBoardGameNightByName(nameNight);
+
+
                 ViewBag.BoardGames = boardGames;
 
 
@@ -72,14 +74,16 @@ namespace Avans.GameNight.App.Controllers
                     BoardGameNightNameNight = BoardGameNight.NameNight,
                 };
 
-
+               
+                if (BoardGameNight.BoardGameNightBoardGame == null||!BoardGameNight.BoardGameNightBoardGame.Contains(newBoardGame))
+                {
                     BoardGameNight.BoardGameNightBoardGame?.Add(newBoardGame);
                     await _boardGameNightRepo.UpdateBoardGameNight(BoardGameNight);
                     await _boardGameNightBoardGameRepo.AddBoardGameNightBoardGame(newBoardGame);
+                }
 
 
-
-                return RedirectToAction("Index");
+                return RedirectToAction("MyBoardGameNights");
 
             }
                 catch (ArgumentException)
