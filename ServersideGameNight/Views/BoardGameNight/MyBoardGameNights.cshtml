@@ -87,7 +87,7 @@
                 @Html.DisplayFor(modelItem => item.Ratings)
             </td>
            <td>
-               <form asp-controller="BoardGameNight" asp-action="AddBoardGame" ><div class="form-group"><input type="submit" value="Add Boardgame" class="btn btn-danger"   style="background-image: url('https://wallpaperaccess.com/full/3405912.jpg'); border-color:  hsl(32, 45%, 25%);"   /></div></form>
+              <a asp-controller="BoardGameNight" asp-action="AddBoardGame" asp-route-nameNight="@item.NameNight" ><div class="form-group"><input type="submit" value="Add Boardgame" class="btn btn-danger"   style="background-image: url('https://wallpaperaccess.com/full/3405912.jpg'); border-color:  hsl(32, 45%, 25%);"   /></div></a>
        
 
             </td>

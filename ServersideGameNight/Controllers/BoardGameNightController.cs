@@ -33,20 +33,21 @@ namespace Avans.GameNight.App.Controllers
             return View();
         }
 
-    [HttpGet]
-        public async Task<IActionResult> AddBoardGame()
+        [HttpGet]
+        public async Task<IActionResult> AddBoardGame([FromQuery]string nameNight)
         {
           
+            var boardGameNight = await _boardGameNightRepo.GetBoardGameNightByName(nameNight);
             var boardGames = await _boardGameRepo.GetBoardGames();
             ViewBag.BoardGames = boardGames;
+            ViewBag.NameNightBag = boardGameNight.NameNight;
             return View();
-
-            
-
-           
+ 
         }
-    [HttpPost]
-        public async Task<IActionResult> AddBoardGame(string nameNight, string selectedBoardGameName)
+        //[Route("/MyBoardGameNights/{nameNight}/{controller}/AddBoardGame")]
+
+        [HttpPost]
+        public async Task<IActionResult> AddBoardGame([FromQuery]string nameNight, BoardGameNightBoardGame boardGameNightBoardGame)
         {
             //Boardgame selected meegeven
 
@@ -55,7 +56,6 @@ namespace Avans.GameNight.App.Controllers
                     {
                 var user = await _userManager.GetUserAsync(User);
                 var boardGames = await _boardGameRepo.GetBoardGames();
-                var selectedBoardGame = await _boardGameNightBoardGameRepo.GETBGNByBoardGameName(selectedBoardGameName);
                 var gameNight = await _boardGameNightRepo.GetBoardGameNightByName(nameNight);
                 ViewBag.BoardGames = boardGames;
 
@@ -63,12 +63,12 @@ namespace Avans.GameNight.App.Controllers
                 if (user.Email != gameNight.Host)
                 {
                     throw new Exception("Youre not the Owner!");
-
                 }
-                //BoardGameNightPlayer maken
+
+                //BoardGameNightBoardGame maken
                 var newBoardGame = new BoardGameNightBoardGame()
                 {
-                    BoardGameNameGame = selectedBoardGame.BoardGameNameGame,
+                    BoardGameNameGame = boardGameNightBoardGame.BoardGameNameGame,
                     BoardGameNightNameNight = gameNight.NameNight,
                 };
 
@@ -80,9 +80,9 @@ namespace Avans.GameNight.App.Controllers
                 }
 
 
-                return View();
-            
-                    }
+                return View("MyBoardGameNights");
+
+            }
                 catch (ArgumentException)
                     {
                         return this.NotFound("The user is not found.");

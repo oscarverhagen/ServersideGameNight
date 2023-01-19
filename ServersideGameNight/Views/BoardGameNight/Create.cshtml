@@ -1,5 +1,6 @@
 ﻿@model Avans.GameNight.Core.Domain.Models.BoardGameNight
 @using Avans.GameNight.App.Models
+@using Avans.GameNight.Core.Domain.Models
 @{
     ViewData["Title"] = "Create";
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -38,17 +39,33 @@
                 <input asp-for="DateTime" class="form-control" />
                 <span asp-validation-for="DateTime" class="text-danger"></span>
             </div>
-         @*
-            <div class="form-group">
-                <label asp-for="Boardgames" class="control-label"></label>
-                 <select asp-for="Boardgames" class="form-control" asp-items="new SelectList(ViewBag.BoardGamesList)">
+       @*  <br />
+            <label asp-for="BoardGameNightBoardGame" class="control-label"></label>
+               
+         <div>
+          <select required class="form-select" multiple >
+                   
+
+                     @foreach (BoardGame item in ViewBag.BoardGamesList)
+                    {
+                          <option value="@item.NameGame">@item.NameGame - @item.KindOfGame - @item.Desciption - @item.Genre - @(item.Mature ? "18+" : "16+") </option>
+                          
+                    }
+            
+                    
+                </select>
+                <span asp-validation-for="BoardGameNightBoardGame" class="text-danger"></span>
+        </div>*@
+         @*   <div class="form-group">
+                <label asp-for="BoardGame" class="control-label"></label>
+                 <select asp-for="BoardGameNightBoardGame" class="form-control" asp-items="new SelectList(ViewBag.BoardGamesList)">
                     <option selected="selected" >Please select</option>
                      @foreach (BoardGame item in ViewBag.BoardGamesList)
                     {
-                        <option value="@item.NameGame" >@item.NameGame</option>
+                        <option value="@item.NameGame" >@item.Mature</option>
                     }
                 </select>
-                <span asp-validation-for="Boardgames" class="text-danger"></span>
+                <span asp-validation-for="BoardGame" class="text-danger"></span>
             </div>*@
 
 @*
