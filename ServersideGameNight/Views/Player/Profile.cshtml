@@ -1,4 +1,4 @@
-﻿@model Avans.GameNight.App.Models.Player
+﻿@model Avans.GameNight.Core.Domain.Models.Player
 
 @{
     ViewData["Title"] = "Profile";
@@ -18,10 +18,10 @@
             @Html.DisplayFor(model => model.Name)
         </dd>
         <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.MailAdress)
+            @Html.DisplayNameFor(model => model.MailAddress)
         </dt>
         <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.MailAdress)
+            @Html.DisplayFor(model => model.MailAddress)
         </dd>
         <dt class = "col-sm-2">
             @Html.DisplayNameFor(model => model.BirthDate)

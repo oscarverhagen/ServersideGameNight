@@ -3,18 +3,16 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
-namespace Avans.GameNight.App.Models
+namespace Avans.GameNight.Core.Domain.Models
 {
     public class BoardGameNightPlayer
     {
 
-        [Key]
-        public int IdPlayer { get; set; }
-        public string GameName { get; set; }
-            public Player Player { get; set; }
+            public string PlayerMailAddress { get; set; }
+            public Player ?Player { get; set; }
 
-            public string NameNight { get; set; }
-            public BoardGameNight BoardGameNight { get; set; }
+            public string BoardGameNightNameNight { get; set; }
+            public BoardGameNight ?BoardGameNight { get; set; }
         
 
 

@@ -1,4 +1,4 @@
-﻿@model Avans.GameNight.App.Models.BoardGameNight
+﻿@model Avans.GameNight.Core.Domain.Models.BoardGameNight
 @using Avans.GameNight.App.Models
 @{
     ViewData["Title"] = "Create";
@@ -89,6 +89,18 @@
                 <label class="form-check-label">
                     <input class="form-check-input" asp-for="Mature" /> 18+
                 </label>
+            </div>
+
+             <div class="form-group">
+              
+                <input asp-for="BoardGameNightBoardGame" class="form-control" hidden/>
+                <span asp-validation-for="Ratings" class="text-danger"></span>
+            </div>
+
+              <div class="form-group">
+              
+                <input asp-for="BoardGameNightPlayer" class="form-control" hidden/>
+                <span asp-validation-for="Ratings" class="text-danger"></span>
             </div>
             <br />
             <div class="form-group">

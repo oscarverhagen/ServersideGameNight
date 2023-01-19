@@ -5,7 +5,7 @@ using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Threading.Tasks;
-namespace Avans.GameNight.App.Models
+namespace Avans.GameNight.Core.Domain.Models
 {
     public class BoardGame
     {
@@ -29,10 +29,10 @@ namespace Avans.GameNight.App.Models
         public IFormFile Picture;
 
 
-        public byte[] PictureB { get; set; }
+        public byte[] ?PictureB { get; set; }
 
     
-        public string PictureFormat { get; set; }
+        public string ?PictureFormat { get; set; }
 
         public IList<BoardGameNightBoardGame> BoardGameNightBoardGame { get; set; }
 

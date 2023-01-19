@@ -1,6 +1,7 @@
-﻿@model Avans.GameNight.App.Models.Player
+﻿@model Avans.GameNight.Core.Domain.Models.Player
 
 @using Avans.GameNight.App.Models
+@using Avans.GameNight.Core.Domain.Models
 @{
     ViewData["Title"] = "Edit";
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -21,8 +22,8 @@
             </div>
             <div class="form-group">
          
-                <input asp-for="MailAdress" class="form-control" hidden/>
-                <span asp-validation-for="MailAdress" class="text-danger"></span>
+                <input asp-for="MailAddress" class="form-control" hidden/>
+                <span asp-validation-for="MailAddress" class="text-danger"></span>
             </div>
             <div class="form-group">
               

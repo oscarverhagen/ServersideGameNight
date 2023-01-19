@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Avans.GameNight.Infrastructure.EntityFramework.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20221026140006_initial")]
-    partial class initial
+    [Migration("20230118203417_InitialCommit")]
+    partial class InitialCommit
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -24,7 +24,7 @@ namespace Avans.GameNight.Infrastructure.EntityFramework.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder, 1L, 1);
 
-            modelBuilder.Entity("Avans.GameNight.App.Models.BoardGame", b =>
+            modelBuilder.Entity("Avans.GameNight.Core.Domain.Models.BoardGame", b =>
                 {
                     b.Property<string>("NameGame")
                         .HasColumnType("nvarchar(450)");
@@ -45,11 +45,9 @@ namespace Avans.GameNight.Infrastructure.EntityFramework.Migrations
                         .HasColumnType("bit");
 
                     b.Property<byte[]>("PictureB")
-                        .IsRequired()
                         .HasColumnType("varbinary(max)");
 
                     b.Property<string>("PictureFormat")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("NameGame");
@@ -57,7 +55,7 @@ namespace Avans.GameNight.Infrastructure.EntityFramework.Migrations
                     b.ToTable("BoardGame");
                 });
 
-            modelBuilder.Entity("Avans.GameNight.App.Models.BoardGameNight", b =>
+            modelBuilder.Entity("Avans.GameNight.Core.Domain.Models.BoardGameNight", b =>
                 {
                     b.Property<string>("NameNight")
                         .HasColumnType("nvarchar(450)");
@@ -99,71 +97,39 @@ namespace Avans.GameNight.Infrastructure.EntityFramework.Migrations
                     b.ToTable("BoardGameNight");
                 });
 
-            modelBuilder.Entity("Avans.GameNight.App.Models.BoardGameNightBoardGame", b =>
+            modelBuilder.Entity("Avans.GameNight.Core.Domain.Models.BoardGameNightBoardGame", b =>
                 {
-                    b.Property<int>("IdBoardGame")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("IdBoardGame"), 1L, 1);
-
                     b.Property<string>("BoardGameNightNameNight")
                         .HasColumnType("nvarchar(450)");
 
-                    b.Property<string>("NameGame")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("NameNight")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("boardNameGame")
+                    b.Property<string>("BoardGameNameGame")
                         .HasColumnType("nvarchar(450)");
 
-                    b.HasKey("IdBoardGame");
+                    b.HasKey("BoardGameNightNameNight", "BoardGameNameGame");
 
-                    b.HasIndex("BoardGameNightNameNight");
-
-                    b.HasIndex("boardNameGame");
+                    b.HasIndex("BoardGameNameGame");
 
                     b.ToTable("BoardGameNightBoardGame");
                 });
 
-            modelBuilder.Entity("Avans.GameNight.App.Models.BoardGameNightPlayer", b =>
+            modelBuilder.Entity("Avans.GameNight.Core.Domain.Models.BoardGameNightPlayer", b =>
                 {
-                    b.Property<int>("IdPlayer")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("IdPlayer"), 1L, 1);
-
                     b.Property<string>("BoardGameNightNameNight")
                         .HasColumnType("nvarchar(450)");
 
-                    b.Property<string>("GameName")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("NameNight")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("PlayerMailAdress")
+                    b.Property<string>("PlayerMailAddress")
                         .HasColumnType("nvarchar(450)");
 
-                    b.HasKey("IdPlayer");
+                    b.HasKey("BoardGameNightNameNight", "PlayerMailAddress");
 
-                    b.HasIndex("BoardGameNightNameNight");
-
-                    b.HasIndex("PlayerMailAdress");
+                    b.HasIndex("PlayerMailAddress");
 
                     b.ToTable("BoardGameNightPlayer");
                 });
 
-            modelBuilder.Entity("Avans.GameNight.App.Models.Player", b =>
+            modelBuilder.Entity("Avans.GameNight.Core.Domain.Models.Player", b =>
                 {
-                    b.Property<string>("MailAdress")
+                    b.Property<string>("MailAddress")
                         .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("Adress")
@@ -204,12 +170,12 @@ namespace Avans.GameNight.Infrastructure.EntityFramework.Migrations
                     b.Property<int>("role")
                         .HasColumnType("int");
 
-                    b.HasKey("MailAdress");
+                    b.HasKey("MailAddress");
 
                     b.ToTable("Player");
                 });
 
-            modelBuilder.Entity("Avans.GameNight.App.Models.Rating", b =>
+            modelBuilder.Entity("Avans.GameNight.Core.Domain.Models.Rating", b =>
                 {
                     b.Property<string>("RaterId")
                         .HasColumnType("nvarchar(450)");
@@ -232,49 +198,57 @@ namespace Avans.GameNight.Infrastructure.EntityFramework.Migrations
                     b.ToTable("Rating");
                 });
 
-            modelBuilder.Entity("Avans.GameNight.App.Models.BoardGameNightBoardGame", b =>
+            modelBuilder.Entity("Avans.GameNight.Core.Domain.Models.BoardGameNightBoardGame", b =>
                 {
-                    b.HasOne("Avans.GameNight.App.Models.BoardGameNight", "BoardGameNight")
+                    b.HasOne("Avans.GameNight.Core.Domain.Models.BoardGame", "BoardGame")
                         .WithMany("BoardGameNightBoardGame")
-                        .HasForeignKey("BoardGameNightNameNight");
+                        .HasForeignKey("BoardGameNameGame")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
-                    b.HasOne("Avans.GameNight.App.Models.BoardGame", "board")
+                    b.HasOne("Avans.GameNight.Core.Domain.Models.BoardGameNight", "BoardGameNight")
                         .WithMany("BoardGameNightBoardGame")
-                        .HasForeignKey("boardNameGame");
+                        .HasForeignKey("BoardGameNightNameNight")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("BoardGame");
 
                     b.Navigation("BoardGameNight");
-
-                    b.Navigation("board");
                 });
 
-            modelBuilder.Entity("Avans.GameNight.App.Models.BoardGameNightPlayer", b =>
+            modelBuilder.Entity("Avans.GameNight.Core.Domain.Models.BoardGameNightPlayer", b =>
                 {
-                    b.HasOne("Avans.GameNight.App.Models.BoardGameNight", "BoardGameNight")
+                    b.HasOne("Avans.GameNight.Core.Domain.Models.BoardGameNight", "BoardGameNight")
                         .WithMany("BoardGameNightPlayer")
-                        .HasForeignKey("BoardGameNightNameNight");
+                        .HasForeignKey("BoardGameNightNameNight")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
-                    b.HasOne("Avans.GameNight.App.Models.Player", "Player")
+                    b.HasOne("Avans.GameNight.Core.Domain.Models.Player", "Player")
                         .WithMany("BoardGameNightPlayer")
-                        .HasForeignKey("PlayerMailAdress");
+                        .HasForeignKey("PlayerMailAddress")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.Navigation("BoardGameNight");
 
                     b.Navigation("Player");
                 });
 
-            modelBuilder.Entity("Avans.GameNight.App.Models.BoardGame", b =>
+            modelBuilder.Entity("Avans.GameNight.Core.Domain.Models.BoardGame", b =>
                 {
                     b.Navigation("BoardGameNightBoardGame");
                 });
 
-            modelBuilder.Entity("Avans.GameNight.App.Models.BoardGameNight", b =>
+            modelBuilder.Entity("Avans.GameNight.Core.Domain.Models.BoardGameNight", b =>
                 {
                     b.Navigation("BoardGameNightBoardGame");
 
                     b.Navigation("BoardGameNightPlayer");
                 });
 
-            modelBuilder.Entity("Avans.GameNight.App.Models.Player", b =>
+            modelBuilder.Entity("Avans.GameNight.Core.Domain.Models.Player", b =>
                 {
                     b.Navigation("BoardGameNightPlayer");
                 });

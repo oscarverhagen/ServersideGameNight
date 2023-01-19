@@ -1,5 +1,5 @@
-﻿using Avans.GameNight.Core.DomainServices.Interfaces;
-using Avans.GameNight.App.Models;
+﻿
+using Avans.GameNight.Core.Domain.Models;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -8,6 +8,7 @@ using System.Linq;
 using System.Net.Mail;
 using System.Text;
 using System.Threading.Tasks;
+using Avans.GameNight.Infrastructure.EntityFramework.Interfaces;
 
 namespace Avans.GameNight.Infrastructure.EntityFramework.Repository
 {
@@ -41,7 +42,7 @@ namespace Avans.GameNight.Infrastructure.EntityFramework.Repository
             else
             {
 
-                return await _appDbContext.Player.FirstOrDefaultAsync(x => x.MailAdress == mail);
+                return await _appDbContext.Player.AsNoTracking().FirstOrDefaultAsync(x => x.MailAddress == mail);
               
             }
         }
@@ -50,7 +51,7 @@ namespace Avans.GameNight.Infrastructure.EntityFramework.Repository
 
         public async Task<List<Player>> GetPlayers()
         {
-            return await _appDbContext.Player.ToListAsync();
+            return await _appDbContext.Player.AsNoTracking().ToListAsync();
         }
 
         public async Task UpdatePlayer(Player player)

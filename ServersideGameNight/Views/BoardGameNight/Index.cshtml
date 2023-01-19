@@ -1,5 +1,6 @@
-﻿@model IEnumerable<Avans.GameNight.App.Models.BoardGameNight>
+﻿@model IEnumerable<Avans.GameNight.Core.Domain.Models.BoardGameNight>
 @using Avans.GameNight.App.Models
+@using Avans.GameNight.Core.Domain.Models
 @{
     ViewData["Title"] = "Index";
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -66,21 +67,32 @@
             <td>
                 @Html.DisplayFor(modelItem => item.TotalPlayers)
             </td>
-            <td>
+         @*   <td>
                  @foreach (Player a in ViewBag.Players)
                     {
                           @Html.DisplayFor(modelItem => @a.Name)
                           <br />
                     }
               
+            </td>*@
+            <td>
+                    @if (item.BoardGameNightPlayer != null)
+                    {
+                        @foreach (BoardGameNightPlayer a in item.BoardGameNightPlayer)
+                    {
+                @Html.DisplayFor(modelItem => a.PlayerMailAddress)
+                <br />
+                    }
+                    }
+                
             </td>
 
              <td>
-                 @foreach (BoardGame a in ViewBag.BoardGamesList)
+                 @*@foreach (BoardGame a in ViewBag.BoardGamesList)
                     {
                           @Html.DisplayFor(modelItem => @a.NameGame)
                           <br />
-                    }
+                    }*@
               
             </td>
             <td>
@@ -105,9 +117,10 @@
                 @Html.DisplayFor(modelItem => item.Ratings)
             </td>
             <td>
-                <a  asp-area="" asp-controller="BoardGameNight" asp-action="Index"><input type="submit" value="Join" class="btn btn-primary" style="background-image: url('https://wallpaperaccess.com/full/3405912.jpg'); border-color:  hsl(32, 45%, 25%);"  /></a> 
-               
-             @* | <a  asp-area="" asp-controller="Player" asp-action="Details"><input type="submit" value="Delete" class="btn btn-primary" /></a>*@
+               <form asp-controller="BoardGameNight" asp-action="Join" asp-route-nameNight="@item?.NameNight"><div class="form-group"><input type="submit" value="Join" class="btn btn-primary"  style="background-image: url('https://wallpaperaccess.com/full/3405912.jpg'); border-color:  hsl(32, 45%, 25%);"  /></div></form>
+            </td>
+            <td>
+                  <form asp-controller="BoardGameNight" asp-action="Leave" asp-route-nameNight="@item?.NameNight"><div class="form-group"><input type="submit" value="Leave" class="btn btn-danger"   style="background-image: url('https://c1.wallpaperflare.com/preview/199/949/128/background-red-gloss-art.jpg'); border-color:  hsl(32, 45%, 25%);"  /></div></form>
             </td>
         </tr>
 }

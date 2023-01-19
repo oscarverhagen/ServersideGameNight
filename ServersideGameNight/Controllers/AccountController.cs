@@ -1,5 +1,5 @@
 ﻿using Avans.GameNight.Core.DomainServices.Interfaces;
-using Avans.GameNight.App.Models;
+using Avans.GameNight.Core.Domain.Models;
 using Microsoft.AspNetCore.Identity;
 
 
@@ -9,6 +9,8 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Avans.GameNight.Infrastructure.EntityFramework.Interfaces;
+using Avans.GameNight.App.Models;
 
 namespace Avans.GameNight.App.Controllers
 {
@@ -99,7 +101,7 @@ namespace Avans.GameNight.App.Controllers
            var player = new Player
             {
                 Name = registerModel.UserName,
-                MailAdress = registerModel.Email,
+                MailAddress = registerModel.Email,
                 BirthDate = registerModel.BirthDate,
             
                 alert = Alert.None,

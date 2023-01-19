@@ -1,5 +1,4 @@
-﻿using Avans.GameNight.Core.DomainServices.Interfaces;
-using Avans.GameNight.App.Models;
+﻿using Avans.GameNight.Core.Domain.Models;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -8,6 +7,7 @@ using System.Linq;
 using System.Net.Mail;
 using System.Text;
 using System.Threading.Tasks;
+using Avans.GameNight.Infrastructure.EntityFramework.Interfaces;
 
 namespace Avans.GameNight.Infrastructure.EntityFramework.Repository
 {
@@ -29,7 +29,9 @@ namespace Avans.GameNight.Infrastructure.EntityFramework.Repository
 
         public Task DestroyBoardGameNight(BoardGameNight boardGameNight)
         {
-            throw new NotImplementedException();
+          
+                throw new NotImplementedException();
+            
         }
 
         public async Task<BoardGameNight> GetBoardGameNightByName(string nameNight)
@@ -41,19 +43,41 @@ namespace Avans.GameNight.Infrastructure.EntityFramework.Repository
             else
             {
 
-                return await _appDbContext.BoardGameNight.FirstOrDefaultAsync(x => x.NameNight == nameNight);
+                return await _appDbContext.BoardGameNight
+                    .Include(bgnb => bgnb.BoardGameNightBoardGame)
+                    .Include(bgnp => bgnp.BoardGameNightPlayer)
+                    .AsNoTracking().FirstOrDefaultAsync(x => x.NameNight == nameNight);
 
             }
         }
 
         public async Task<List<BoardGameNight>> GetBoardGameNights()
         {
-            return await _appDbContext.BoardGameNight.ToListAsync();
+            return await _appDbContext.BoardGameNight
+                .Include(bgnp => bgnp.BoardGameNightPlayer)
+                .AsNoTracking().ToListAsync();
         }
 
-        public Task UpdateBoardGameNight(BoardGameNight boardGameNight)
+        public async Task<List<BoardGameNight>> GetBoardGameNightsByHost(string hostName)
         {
-            throw new NotImplementedException();
+            if (hostName.Length < 1)
+            {
+                throw new ArgumentException("Error empty ", "nameNight");
+            }
+            else
+            {
+                return await _appDbContext.BoardGameNight
+             .Include(bgnp => bgnp.BoardGameNightPlayer)
+             .Where(bgnp2 => bgnp2.Host == hostName)
+             .AsNoTracking().ToListAsync();
+             
+            }
+        }
+
+        public async Task UpdateBoardGameNight(BoardGameNight boardGameNight)
+        {
+            _appDbContext.Update(boardGameNight);
+            await _appDbContext.SaveChangesAsync();
         }
 
         public Task UpdateBoardGameNightByBoardGameNight(string NameNight, BoardGameNight boardGameNight)

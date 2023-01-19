@@ -1,4 +1,4 @@
-﻿using Avans.GameNight.App.Models;
+﻿using Avans.GameNight.Core.Domain.Models;
 using System;
 using System.Collections.Generic;
 using System.Net.Mail;
@@ -6,7 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 
-namespace Avans.GameNight.Core.DomainServices.Interfaces
+namespace Avans.GameNight.Infrastructure.EntityFramework.Interfaces
 {
     public interface IPlayerRepository
     {

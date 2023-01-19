@@ -1,0 +1,24 @@
+﻿@using Avans.GameNight.Core.Domain.Models
+
+<h4>Add Boardgame</h4>
+<br />
+ <div class="form-group">
+               @* <label asp-for="gameName" class="control-label"></label>*@
+                <select required class="form-select" >
+                    <option selected="selected" >Please select</option>
+
+                     @foreach (BoardGame item in ViewBag.BoardGames)
+                    {
+                          <option value="@item.NameGame">@item.NameGame - @item.KindOfGame - @item.Desciption - @item.Genre - @(item.Mature ? "18+" : "16+") </option>
+                          
+                    }
+            
+                      @*  <span asp-validation-for="gameName" class="text-danger"></span>*@
+                </select>
+                
+            </div>
+            <br />
+
+             <div class="form-group">
+                <form asp-controller="BoardGameNight" asp-action="AddBoardGame" asp-route-AddBoardGame=""><div class="form-group"><input type="submit" value="Add Boardgame" class="btn btn-primary"  style="background-image: url('https://wallpaperaccess.com/full/3405912.jpg'); border-color:  hsl(32, 45%, 25%);"  /></div></form>
+            </div>

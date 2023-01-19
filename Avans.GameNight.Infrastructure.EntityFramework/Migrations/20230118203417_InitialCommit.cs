@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace Avans.GameNight.Infrastructure.EntityFramework.Migrations
 {
-    public partial class initial : Migration
+    public partial class InitialCommit : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -18,8 +18,8 @@ namespace Avans.GameNight.Infrastructure.EntityFramework.Migrations
                     Mature = table.Column<bool>(type: "bit", nullable: false),
                     Desciption = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     KindOfGame = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    PictureB = table.Column<byte[]>(type: "varbinary(max)", nullable: false),
-                    PictureFormat = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                    PictureB = table.Column<byte[]>(type: "varbinary(max)", nullable: true),
+                    PictureFormat = table.Column<string>(type: "nvarchar(max)", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -50,7 +50,7 @@ namespace Avans.GameNight.Infrastructure.EntityFramework.Migrations
                 name: "Player",
                 columns: table => new
                 {
-                    MailAdress = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    MailAddress = table.Column<string>(type: "nvarchar(450)", nullable: false),
                     Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     BirthDate = table.Column<DateTime>(type: "datetime2", nullable: false),
                     alert = table.Column<int>(type: "int", nullable: false),
@@ -65,7 +65,7 @@ namespace Avans.GameNight.Infrastructure.EntityFramework.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Player", x => x.MailAdress);
+                    table.PrimaryKey("PK_Player", x => x.MailAddress);
                 });
 
             migrationBuilder.CreateTable(
@@ -87,73 +87,59 @@ namespace Avans.GameNight.Infrastructure.EntityFramework.Migrations
                 name: "BoardGameNightBoardGame",
                 columns: table => new
                 {
-                    IdBoardGame = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    NameGame = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    NameNight = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    boardNameGame = table.Column<string>(type: "nvarchar(450)", nullable: true),
-                    BoardGameNightNameNight = table.Column<string>(type: "nvarchar(450)", nullable: true)
+                    BoardGameNameGame = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    BoardGameNightNameNight = table.Column<string>(type: "nvarchar(450)", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_BoardGameNightBoardGame", x => x.IdBoardGame);
+                    table.PrimaryKey("PK_BoardGameNightBoardGame", x => new { x.BoardGameNightNameNight, x.BoardGameNameGame });
                     table.ForeignKey(
-                        name: "FK_BoardGameNightBoardGame_BoardGame_boardNameGame",
-                        column: x => x.boardNameGame,
+                        name: "FK_BoardGameNightBoardGame_BoardGame_BoardGameNameGame",
+                        column: x => x.BoardGameNameGame,
                         principalTable: "BoardGame",
-                        principalColumn: "NameGame");
+                        principalColumn: "NameGame",
+                        onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_BoardGameNightBoardGame_BoardGameNight_BoardGameNightNameNight",
                         column: x => x.BoardGameNightNameNight,
                         principalTable: "BoardGameNight",
-                        principalColumn: "NameNight");
+                        principalColumn: "NameNight",
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
                 name: "BoardGameNightPlayer",
                 columns: table => new
                 {
-                    IdPlayer = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    GameName = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    PlayerMailAdress = table.Column<string>(type: "nvarchar(450)", nullable: true),
-                    NameNight = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    BoardGameNightNameNight = table.Column<string>(type: "nvarchar(450)", nullable: true)
+                    PlayerMailAddress = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    BoardGameNightNameNight = table.Column<string>(type: "nvarchar(450)", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_BoardGameNightPlayer", x => x.IdPlayer);
+                    table.PrimaryKey("PK_BoardGameNightPlayer", x => new { x.BoardGameNightNameNight, x.PlayerMailAddress });
                     table.ForeignKey(
                         name: "FK_BoardGameNightPlayer_BoardGameNight_BoardGameNightNameNight",
                         column: x => x.BoardGameNightNameNight,
                         principalTable: "BoardGameNight",
-                        principalColumn: "NameNight");
+                        principalColumn: "NameNight",
+                        onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_BoardGameNightPlayer_Player_PlayerMailAdress",
-                        column: x => x.PlayerMailAdress,
+                        name: "FK_BoardGameNightPlayer_Player_PlayerMailAddress",
+                        column: x => x.PlayerMailAddress,
                         principalTable: "Player",
-                        principalColumn: "MailAdress");
+                        principalColumn: "MailAddress",
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_BoardGameNightBoardGame_BoardGameNightNameNight",
+                name: "IX_BoardGameNightBoardGame_BoardGameNameGame",
                 table: "BoardGameNightBoardGame",
-                column: "BoardGameNightNameNight");
+                column: "BoardGameNameGame");
 
             migrationBuilder.CreateIndex(
-                name: "IX_BoardGameNightBoardGame_boardNameGame",
-                table: "BoardGameNightBoardGame",
-                column: "boardNameGame");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_BoardGameNightPlayer_BoardGameNightNameNight",
+                name: "IX_BoardGameNightPlayer_PlayerMailAddress",
                 table: "BoardGameNightPlayer",
-                column: "BoardGameNightNameNight");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_BoardGameNightPlayer_PlayerMailAdress",
-                table: "BoardGameNightPlayer",
-                column: "PlayerMailAdress");
+                column: "PlayerMailAddress");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
