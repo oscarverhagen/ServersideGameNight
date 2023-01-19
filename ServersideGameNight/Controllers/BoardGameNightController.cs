@@ -26,7 +26,7 @@ namespace Avans.GameNight.App.Controllers
             _boardGameRepo = boardGameRepo;
             _boardGameNightBoardGameRepo = BoardGameNightBoardGameRepository;
 
-    }
+        }
         public ActionResult AccesDenied()
         {
 
@@ -46,12 +46,40 @@ namespace Avans.GameNight.App.Controllers
            
         }
     [HttpPost]
-        public async Task<IActionResult> AddBoardGame(string gameName)
+        public async Task<IActionResult> AddBoardGame(string nameNight, string selectedBoardGameName)
         {
+            //Boardgame selected meegeven
+
+            //Vervolgends add to BoardGameNightBoardGame
                 try
                     {
+                var user = await _userManager.GetUserAsync(User);
                 var boardGames = await _boardGameRepo.GetBoardGames();
+                var selectedBoardGame = await _boardGameNightBoardGameRepo.GETBGNByBoardGameName(selectedBoardGameName);
+                var gameNight = await _boardGameNightRepo.GetBoardGameNightByName(nameNight);
                 ViewBag.BoardGames = boardGames;
+
+
+                if (user.Email != gameNight.Host)
+                {
+                    throw new Exception("Youre not the Owner!");
+
+                }
+                //BoardGameNightPlayer maken
+                var newBoardGame = new BoardGameNightBoardGame()
+                {
+                    BoardGameNameGame = selectedBoardGame.BoardGameNameGame,
+                    BoardGameNightNameNight = gameNight.NameNight,
+                };
+
+                if ((gameNight.BoardGameNightBoardGame == null) || !gameNight.BoardGameNightBoardGame.Contains(newBoardGame))
+                {
+                    gameNight.BoardGameNightBoardGame?.Add(newBoardGame);
+                    await _boardGameNightRepo.UpdateBoardGameNight(gameNight);
+                    await _boardGameNightBoardGameRepo.AddBoardGameNightBoardGame(newBoardGame);
+                }
+
+
                 return View();
             
                     }
@@ -62,7 +90,7 @@ namespace Avans.GameNight.App.Controllers
         }
 
 
-
+        //Index MyBoardGames
         [HttpGet]
         public async Task<IActionResult> MyBoardGameNights()
         {
@@ -73,8 +101,7 @@ namespace Avans.GameNight.App.Controllers
                
                 var myBoardGames = await _boardGameNightRepo.GetBoardGameNightsByHost(user.Email);
 
-
-
+               
                 return View(myBoardGames);
             }
 

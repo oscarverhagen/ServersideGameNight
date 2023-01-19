@@ -1,5 +1,6 @@
 ﻿using Avans.GameNight.Core.Domain.Models;
 using Avans.GameNight.Infrastructure.EntityFramework.Interfaces;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,9 +11,16 @@ namespace Avans.GameNight.Infrastructure.EntityFramework.Repository
 {
     public class BoardGameNightBoardGameRepository : IBoardGameNightBoardGameRepository
     {
-        public Task AddBoardGameNightBoardGame(BoardGameNightBoardGame boardGameNightBoardGame)
+        private DataContext.AppDbContext _appDbContext;
+        public BoardGameNightBoardGameRepository(DataContext.AppDbContext context)
         {
-            throw new NotImplementedException();
+
+            _appDbContext = context;
+        }
+        public async Task AddBoardGameNightBoardGame(BoardGameNightBoardGame boardGameNightBoardGame)
+        {
+            _appDbContext.BoardGameNightBoardGame.Add(boardGameNightBoardGame);
+            await _appDbContext.SaveChangesAsync();
         }
 
         public Task DestroyBoardGameNightBoardGame(BoardGameNightBoardGame boardGameNightBoardGame)
@@ -25,9 +33,19 @@ namespace Avans.GameNight.Infrastructure.EntityFramework.Repository
             throw new NotImplementedException();
         }
 
-        public Task<IList<BoardGameNightBoardGame>> GetBoardGameNightBoardGamesByBoardGameName(string NameBoardGame)
+        public async Task<BoardGameNightBoardGame> GETBGNByBoardGameName(string NameBoardGame)
         {
-            throw new NotImplementedException();
+            if (NameBoardGame.Length < 0)
+            {
+                throw new ArgumentException("Error empty ", "NameBoardGame");
+            }
+            else
+            {
+
+                return await _appDbContext.BoardGameNightBoardGame
+               .AsNoTracking().FirstOrDefaultAsync(x => x.BoardGameNameGame == NameBoardGame);
+
+            }
         }
 
         public Task UpdateBoardGameNightBoardGame(BoardGameNightBoardGame boardGameNightBoardGame)
