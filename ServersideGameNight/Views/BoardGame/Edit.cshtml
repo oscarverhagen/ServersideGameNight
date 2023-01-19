@@ -1,5 +1,4 @@
-﻿@model Avans.GameNight.App.Models.BoardGame
-
+﻿@model Avans.GameNight.Core.Domain.Models.BoardGame
 @{
     ViewData["Title"] = "View";
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -39,22 +38,28 @@
                 <span asp-validation-for="KindOfGame" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="PictureB" class="control-label"></label>
+               @* <label asp-for="PictureB" class="control-label"></label>*@
                 <input asp-for="PictureB" class="form-control" hidden/>
                 <span asp-validation-for="PictureB" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="PictureFormat" class="control-label"></label>
+                @*<label asp-for="PictureFormat" class="control-label"></label>*@
                 <input asp-for="PictureFormat" class="form-control" hidden/>
                 <span asp-validation-for="PictureFormat" class="text-danger"></span>
             </div>
+            <br />
+
+            <div>
+                 <input asp-for="BoardGameNightBoardGame" class="form-control" hidden/>
+               <span asp-validation-for="BoardGameNightBoardGame" class="text-danger"></span>
+            </div>
             <div class="form-group">
-                <input type="submit" value="Save" class="btn btn-primary" />
+               <a  asp-area="" asp-controller="BoardGame" asp-action="Index"><input type="submit" value="Save" class="btn btn-primary"style="background-image: url('https://wallpaperaccess.com/full/3405912.jpg'); border-color:  hsl(32, 45%, 25%);"/></a> 
             </div>
         </form>
     </div>
 </div>
-
+<br />
 <div>
   <a  asp-area="" asp-controller="BoardGame" asp-action="Index"><input type="submit" value="Back to view" class="btn btn-primary"style="background-image: url('https://wallpaperaccess.com/full/3405912.jpg'); border-color:  hsl(32, 45%, 25%);" /></a> 
 </div>

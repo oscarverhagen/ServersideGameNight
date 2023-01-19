@@ -1,4 +1,6 @@
-﻿@model IEnumerable<Avans.GameNight.App.Models.BoardGameNight>
+﻿@model IEnumerable<Avans.GameNight.Core.Domain.Models.BoardGameNight>
+@using Avans.GameNight.App.Models
+@using Avans.GameNight.Core.Domain.Models
 
 @{
     ViewData["Title"] = "MyBoardGameNights";
@@ -20,7 +22,7 @@
                 @Html.DisplayNameFor(model => model.TotalPlayers)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.MaxPlayers)
+                Players:
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.DateTime)
@@ -55,8 +57,16 @@
             <td>
                 @Html.DisplayFor(modelItem => item.TotalPlayers)
             </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.MaxPlayers)
+             <td>
+                    @if (item.BoardGameNightPlayer != null)
+                    {
+                        @foreach (BoardGameNightPlayer a in item.BoardGameNightPlayer)
+                    {
+                @Html.DisplayFor(modelItem => a.PlayerMailAddress)
+                <br />
+                    }
+                    }
+                
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.DateTime)
@@ -77,8 +87,8 @@
                 @Html.DisplayFor(modelItem => item.Ratings)
             </td>
            <td>
-               <a  asp-area="" asp-controller="BoardGameNight" asp-action="MyBoardGameNights"><input type="submit" value="Leave" class="btn btn-primary" style="background-image: url('https://wallpaperaccess.com/full/3405912.jpg'); border-color:  hsl(32, 45%, 25%);"  /></a>|
-              <a  asp-area="" asp-controller="BoardGameNight" asp-action="MyBoardGameNights"><input type="submit" value="Edit" class="btn btn-primary" style="background-image: url('https://wallpaperaccess.com/full/3405912.jpg'); border-color:  hsl(32, 45%, 25%);" /></a>
+               <form asp-controller="BoardGameNight" asp-action="AddBoardGame" ><div class="form-group"><input type="submit" value="Add Boardgame" class="btn btn-danger"   style="background-image: url('https://wallpaperaccess.com/full/3405912.jpg'); border-color:  hsl(32, 45%, 25%);"   /></div></form>
+       
 
             </td>
         </tr>

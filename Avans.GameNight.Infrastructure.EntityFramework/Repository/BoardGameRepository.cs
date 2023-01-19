@@ -1,5 +1,5 @@
-﻿using Avans.GameNight.Core.DomainServices.Interfaces;
-using Avans.GameNight.App.Models;
+﻿
+using Avans.GameNight.Core.Domain.Models;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -8,6 +8,7 @@ using System.Linq;
 using System.Net.Mail;
 using System.Text;
 using System.Threading.Tasks;
+using Avans.GameNight.Infrastructure.EntityFramework.Interfaces;
 
 namespace Avans.GameNight.Infrastructure.EntityFramework.Repository
 {
@@ -32,16 +33,21 @@ namespace Avans.GameNight.Infrastructure.EntityFramework.Repository
             _appDbContext.Remove(boardGame);
             await _appDbContext.SaveChangesAsync();
         }
-
+       
         public async Task<BoardGame> GetBoardGameByName(string nameGame)
         {
+            if (nameGame == null)
+            {
+                throw new ArgumentException("If name is null", "nameGame");
+            }
             if (nameGame.Length <= 0)
             {
                 throw new ArgumentException("Length should be bigger then 0", "nameGame");
             }
+
             else
             {
-                return await _appDbContext.BoardGame.FirstOrDefaultAsync(p => p.NameGame == nameGame);
+                return await _appDbContext.BoardGame.AsNoTracking().FirstOrDefaultAsync(p => p.NameGame == nameGame);
             }
         }
 

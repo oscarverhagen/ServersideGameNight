@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
-namespace Avans.GameNight.App.Models
+namespace Avans.GameNight.Core.Domain.Models
 {
     public class Player
     {
@@ -12,7 +12,7 @@ namespace Avans.GameNight.App.Models
         [Key]
         [Required]
         [EmailAddress]
-        public string MailAdress { get; set; }
+        public string MailAddress { get; set; }
 
         [DataType(DataType.Date)]
         private DateTime _birthDate;

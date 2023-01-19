@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace Avans.GameNight.Infrastructure.EntityFramework.Migrations.Identity
 {
-    public partial class Identity : Migration
+    public partial class InitialCommit : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {

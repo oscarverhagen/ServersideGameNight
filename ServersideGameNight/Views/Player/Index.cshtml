@@ -1,4 +1,4 @@
-﻿@model IEnumerable<Avans.GameNight.App.Models.Player>
+﻿@model IEnumerable<Avans.GameNight.Core.Domain.Models.Player>
 
 @{
     
@@ -22,7 +22,7 @@
                 @Html.DisplayNameFor(model => model.Name)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.MailAdress)
+                @Html.DisplayNameFor(model => model.MailAddress)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.BirthDate)
@@ -64,7 +64,7 @@
                 @Html.DisplayFor(modelItem => item.Name)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.MailAdress.ToString())
+                @Html.DisplayFor(modelItem => item.MailAddress.ToString())
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.BirthDate)

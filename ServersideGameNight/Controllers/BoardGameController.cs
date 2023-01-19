@@ -2,7 +2,8 @@
 using Microsoft.AspNetCore.Mvc;
 using Avans.GameNight.Core.DomainServices.Interfaces;
 using Microsoft.AspNetCore.Identity;
-
+using Avans.GameNight.Infrastructure.EntityFramework.Interfaces;
+using Avans.GameNight.Core.Domain.Models;
 
 namespace Avans.GameNight.App.Controllers
 {
@@ -36,29 +37,27 @@ namespace Avans.GameNight.App.Controllers
             return View(boardGames); 
         }
 
-     
+        [HttpGet]
+        public async Task<IActionResult> Edit(string nameGame)
+        {
+           
+            var boardGame = await _boardGameRepo.GetBoardGameByName(nameGame);
+            return View(boardGame);
+        }
 
-        //public async Task<IActionResult> Edit()
-        //{
-        //    var user = await _userManager.GetUserAsync(User);
-        //    var player = await _boardGameRepo.GetPlayerByMailAdress(user.Email);
-        //    return View(player);
-        //}
+        [HttpPost]
+        [ValidateAntiForgeryToken]
 
-        //[HttpPost]
-        //[ValidateAntiForgeryToken]
+        public async Task<IActionResult> Edit(BoardGame BoardGameTemp)
+        {
+           
+            if (ModelState.IsValid)
+            {
+                await _boardGameRepo.UpdateBoardGame(BoardGameTemp);
+            }
+            return RedirectToAction("Index");
 
-        //public async Task<IActionResult> Edit(Player playerTemp)
-        //{
-
-        //    if (ModelState.IsValid)
-        //    {
-        //        await _playerRepo.UpdatePlayer(playerTemp);
-        //    }
-        //    return RedirectToAction("Profile", new { MailAdress = playerTemp.MailAdress });
-
-        //}
-
+        }
 
 
         [HttpGet]
@@ -67,7 +66,7 @@ namespace Avans.GameNight.App.Controllers
             var user = await _userManager.GetUserAsync(User);
             var player = await _playerRepo.GetPlayerByMailAdress(user.Email);
 
-            if (player.role == Models.Role.HOST)
+            if (player.role == Role.HOST)
             {
 
                 return View();

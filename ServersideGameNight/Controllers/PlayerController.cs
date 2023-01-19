@@ -2,6 +2,8 @@
 using Avans.GameNight.App.Models;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Avans.GameNight.Infrastructure.EntityFramework.Interfaces;
+using Avans.GameNight.Core.Domain.Models;
 
 namespace Avans.GameNight.App.Controllers
 {
@@ -78,7 +80,7 @@ namespace Avans.GameNight.App.Controllers
             //{
             await _playerRepo.UpdatePlayer(playerTemp);
             //}
-            return RedirectToAction("Profile", new { MailAdress = playerTemp.MailAdress });
+            return RedirectToAction("Profile", new { MailAdress = playerTemp.MailAddress });
 
         }
     }

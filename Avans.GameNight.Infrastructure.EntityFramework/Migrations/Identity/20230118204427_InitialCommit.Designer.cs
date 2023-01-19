@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Avans.GameNight.Infrastructure.EntityFramework.Migrations.Identity
 {
     [DbContext(typeof(IdentityContext))]
-    [Migration("20221012135828_Identity")]
-    partial class Identity
+    [Migration("20230118204427_InitialCommit")]
+    partial class InitialCommit
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
