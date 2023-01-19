@@ -74,7 +74,7 @@ namespace Avans.GameNight.App.Controllers
 
                 if ((gameNight.BoardGameNightBoardGame == null) || !gameNight.BoardGameNightBoardGame.Contains(newBoardGame))
                 {
-                    gameNight.BoardGameNightBoardGame?.Add(newBoardGame);
+                   // gameNight.BoardGameNightBoardGame?.Add(newBoardGame);
                     await _boardGameNightRepo.UpdateBoardGameNight(gameNight);
                     await _boardGameNightBoardGameRepo.AddBoardGameNightBoardGame(newBoardGame);
                 }

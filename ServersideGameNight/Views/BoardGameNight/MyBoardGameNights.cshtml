@@ -24,6 +24,10 @@
             <th>
                 Players:
             </th>
+
+            <th>
+                BoardGames:
+            </th>
             <th>
                 @Html.DisplayNameFor(model => model.DateTime)
             </th>
@@ -63,6 +67,18 @@
                         @foreach (BoardGameNightPlayer a in item.BoardGameNightPlayer)
                     {
                 @Html.DisplayFor(modelItem => a.PlayerMailAddress)
+                <br />
+                    }
+                    }
+                
+            </td>
+
+               <td>
+                    @if (item.BoardGameNightBoardGame != null)
+                    {
+                        @foreach (BoardGameNightBoardGame a2 in item.BoardGameNightBoardGame)
+                    {
+                @Html.DisplayFor(modelItem => a2.BoardGameNameGame)
                 <br />
                     }
                     }
