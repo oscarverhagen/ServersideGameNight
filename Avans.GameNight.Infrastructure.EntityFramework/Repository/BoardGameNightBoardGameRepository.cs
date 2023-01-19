@@ -33,24 +33,25 @@ namespace Avans.GameNight.Infrastructure.EntityFramework.Repository
             throw new NotImplementedException();
         }
 
-        public async Task<BoardGameNightBoardGame> GETBGNByBoardGameName(string NameBoardGame)
+        public async Task<IList<BoardGameNightBoardGame>> GETBGNByBoardGameName(string NameBoardGame)
         {
-            if (NameBoardGame.Length < 0)
+            if (NameBoardGame.Length < 1)
             {
                 throw new ArgumentException("Error empty ", "NameBoardGame");
             }
             else
             {
-
                 return await _appDbContext.BoardGameNightBoardGame
-               .AsNoTracking().FirstOrDefaultAsync(x => x.BoardGameNameGame == NameBoardGame);
-
+                                  //.Include(bgnp => bgnp.PlayerMailAddress)
+                                  .AsNoTracking().Where(x => x.BoardGameNameGame == NameBoardGame).ToListAsync();
+              
             }
         }
 
-        public Task UpdateBoardGameNightBoardGame(BoardGameNightBoardGame boardGameNightBoardGame)
+        public async Task UpdateBoardGameNightBoardGame(BoardGameNightBoardGame boardGameNightBoardGame)
         {
-            throw new NotImplementedException();
+            _appDbContext.Update(boardGameNightBoardGame);
+            await _appDbContext.SaveChangesAsync();
         }
 
         public Task UpdateBoardGameNightBoardGameByBoardGameNightBoardGame(string NameBoardGame, BoardGameNightBoardGame boardGameNightBoardGame)

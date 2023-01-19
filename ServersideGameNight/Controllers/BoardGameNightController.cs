@@ -56,11 +56,11 @@ namespace Avans.GameNight.App.Controllers
                     {
                 var user = await _userManager.GetUserAsync(User);
                 var boardGames = await _boardGameRepo.GetBoardGames();
-                var gameNight = await _boardGameNightRepo.GetBoardGameNightByName(nameNight);
+                var BoardGameNight = await _boardGameNightRepo.GetBoardGameNightByName(nameNight);
                 ViewBag.BoardGames = boardGames;
 
 
-                if (user.Email != gameNight.Host)
+                if (user.Email != BoardGameNight.Host)
                 {
                     throw new Exception("Youre not the Owner!");
                 }
@@ -69,18 +69,17 @@ namespace Avans.GameNight.App.Controllers
                 var newBoardGame = new BoardGameNightBoardGame()
                 {
                     BoardGameNameGame = boardGameNightBoardGame.BoardGameNameGame,
-                    BoardGameNightNameNight = gameNight.NameNight,
+                    BoardGameNightNameNight = BoardGameNight.NameNight,
                 };
 
-                if ((gameNight.BoardGameNightBoardGame == null) || !gameNight.BoardGameNightBoardGame.Contains(newBoardGame))
-                {
-                   // gameNight.BoardGameNightBoardGame?.Add(newBoardGame);
-                    await _boardGameNightRepo.UpdateBoardGameNight(gameNight);
+
+                    BoardGameNight.BoardGameNightBoardGame?.Add(newBoardGame);
+                    await _boardGameNightRepo.UpdateBoardGameNight(BoardGameNight);
                     await _boardGameNightBoardGameRepo.AddBoardGameNightBoardGame(newBoardGame);
-                }
 
 
-                return View("MyBoardGameNights");
+
+                return RedirectToAction("Index");
 
             }
                 catch (ArgumentException)
