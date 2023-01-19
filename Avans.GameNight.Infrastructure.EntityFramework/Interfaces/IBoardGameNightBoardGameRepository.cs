@@ -11,7 +11,7 @@ namespace Avans.GameNight.Infrastructure.EntityFramework.Interfaces
     {
         public Task<List<BoardGameNightBoardGame>> GetBoardGameNightBoardGames();
 
-        public Task<IList<BoardGameNightBoardGame>> GetBoardGameNightBoardGamesByBoardGameName(string NameBoardGame);
+        public Task<IList<BoardGameNightBoardGame>> GETBGNByBoardGameName(string NameBoardGame);
         public Task AddBoardGameNightBoardGame(BoardGameNightBoardGame boardGameNightBoardGame);
         public Task UpdateBoardGameNightBoardGame(BoardGameNightBoardGame boardGameNightBoardGame);
         public Task UpdateBoardGameNightBoardGameByBoardGameNightBoardGame(string NameBoardGame, BoardGameNightBoardGame boardGameNightBoardGame);

@@ -26,35 +26,66 @@ namespace Avans.GameNight.App.Controllers
             _boardGameRepo = boardGameRepo;
             _boardGameNightBoardGameRepo = BoardGameNightBoardGameRepository;
 
-    }
+        }
         public ActionResult AccesDenied()
         {
 
             return View();
         }
 
-    [HttpGet]
-        public async Task<IActionResult> AddBoardGame()
+        [HttpGet]
+        public async Task<IActionResult> AddBoardGame([FromQuery]string nameNight)
         {
           
+            var boardGameNight = await _boardGameNightRepo.GetBoardGameNightByName(nameNight);
             var boardGames = await _boardGameRepo.GetBoardGames();
             ViewBag.BoardGames = boardGames;
+            ViewBag.NameNightBag = boardGameNight.NameNight;
             return View();
-
-            
-
-           
+ 
         }
-    [HttpPost]
-        public async Task<IActionResult> AddBoardGame(string gameName)
+        //[Route("/MyBoardGameNights/{nameNight}/{controller}/AddBoardGame")]
+
+        [HttpPost]
+        public async Task<IActionResult> AddBoardGame([FromQuery]string nameNight, BoardGameNightBoardGame boardGameNightBoardGame)
         {
+            //Boardgame selected meegeven
+
+            //Vervolgends add to BoardGameNightBoardGame
                 try
                     {
+                var user = await _userManager.GetUserAsync(User);
                 var boardGames = await _boardGameRepo.GetBoardGames();
+                var BoardGameNight = await _boardGameNightRepo.GetBoardGameNightByName(nameNight);
+
+
                 ViewBag.BoardGames = boardGames;
-                return View();
-            
-                    }
+
+
+                if (user.Email != BoardGameNight.Host)
+                {
+                    throw new Exception("Youre not the Owner!");
+                }
+
+                //BoardGameNightBoardGame maken
+                var newBoardGame = new BoardGameNightBoardGame()
+                {
+                    BoardGameNameGame = boardGameNightBoardGame.BoardGameNameGame,
+                    BoardGameNightNameNight = BoardGameNight.NameNight,
+                };
+
+               
+                if (BoardGameNight.BoardGameNightBoardGame == null||!BoardGameNight.BoardGameNightBoardGame.Contains(newBoardGame))
+                {
+                    BoardGameNight.BoardGameNightBoardGame?.Add(newBoardGame);
+                    await _boardGameNightRepo.UpdateBoardGameNight(BoardGameNight);
+                    await _boardGameNightBoardGameRepo.AddBoardGameNightBoardGame(newBoardGame);
+                }
+
+
+                return RedirectToAction("MyBoardGameNights");
+
+            }
                 catch (ArgumentException)
                     {
                         return this.NotFound("The user is not found.");
@@ -62,7 +93,7 @@ namespace Avans.GameNight.App.Controllers
         }
 
 
-
+        //Index MyBoardGames
         [HttpGet]
         public async Task<IActionResult> MyBoardGameNights()
         {
@@ -73,8 +104,7 @@ namespace Avans.GameNight.App.Controllers
                
                 var myBoardGames = await _boardGameNightRepo.GetBoardGameNightsByHost(user.Email);
 
-
-
+               
                 return View(myBoardGames);
             }
 

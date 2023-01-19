@@ -1,10 +1,13 @@
-﻿@using Avans.GameNight.Core.Domain.Models
+﻿@model Avans.GameNight.Core.Domain.Models.BoardGameNightBoardGame;
+@using Avans.GameNight.Core.Domain.Models;
 
-<h4>Add Boardgame</h4>
+<h4>Add Boardgame @ViewBag.NameNightBag  </h4>
 <br />
  <div class="form-group">
-               @* <label asp-for="gameName" class="control-label"></label>*@
-                <select required class="form-select" >
+            
+   <br />
+    <form asp-controller="BoardGameNight" asp-action="AddBoardGame" asp-route-nameNight="@ViewBag.NameNightBag" > 
+                <select required asp-for="BoardGameNameGame" class="form-select" >
                     <option selected="selected" >Please select</option>
 
                      @foreach (BoardGame item in ViewBag.BoardGames)
@@ -13,12 +16,68 @@
                           
                     }
             
-                      @*  <span asp-validation-for="gameName" class="text-danger"></span>*@
+                    
                 </select>
-                
-            </div>
-            <br />
+                 <br />
+                <div class="form-group">
 
-             <div class="form-group">
-                <form asp-controller="BoardGameNight" asp-action="AddBoardGame" asp-route-AddBoardGame=""><div class="form-group"><input type="submit" value="Add Boardgame" class="btn btn-primary"  style="background-image: url('https://wallpaperaccess.com/full/3405912.jpg'); border-color:  hsl(32, 45%, 25%);"  /></div></form>
+                    <input type="submit" value="Add Boardgame" class="btn btn-danger"   style="background-image: url('https://wallpaperaccess.com/full/3405912.jpg'); border-color:  hsl(32, 45%, 25%);"   />
+                    </div>
+      </form>          
             </div>
+            
+        
+  
+          
+
+
+
+@*   <html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>AddGameNightBoardGame</title>
+</head>
+<body>
+
+<h4>GameNight:  </h4>
+
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="AddBoardGame">
+            <div asp-validation-summary="All" class="text-danger"></div>
+                @Html.HiddenFor(model => model.BoardGameNight)
+
+            <div class="form-group">
+                <label asp-for="BoardGameNameGame" class="control-label"></label>
+                <select required asp-for="BoardGameNameGame" class="form-select" >
+                    <option selected="selected" >Please select</option>
+                        @if (ViewBag.BoardGames != null){
+                            @foreach (BoardGame item in ViewBag.BoardGames)
+                            {
+                                <option value="@item.NameGame">@item.NameGame - @item.Genre - @(item.Mature ? "18+" : "16+")</option>
+                            }
+                        }
+                        
+                </select>
+                <span asp-validation-for="BoardGameNameGame" class="text-danger"></span>
+            </div>
+
+
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-controller="BoardGameNight" asp-action="MyBoardGameNights">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
+</body>
+</html>
+*@

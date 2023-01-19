@@ -44,17 +44,18 @@ namespace Avans.GameNight.Infrastructure.EntityFramework.Repository
             {
 
                 return await _appDbContext.BoardGameNight
-                    .Include(bgnb => bgnb.BoardGameNightBoardGame)
-                    .Include(bgnp => bgnp.BoardGameNightPlayer)
-                    .AsNoTracking().FirstOrDefaultAsync(x => x.NameNight == nameNight);
+                .Include(bgnp => bgnp.BoardGameNightPlayer)
+                .Include(bgnb2 => bgnb2.BoardGameNightBoardGame)
+                .AsNoTracking().FirstOrDefaultAsync(x => x.NameNight == nameNight);
 
             }
         }
 
         public async Task<List<BoardGameNight>> GetBoardGameNights()
         {
-            return await _appDbContext.BoardGameNight
+            return await _appDbContext.BoardGameNight               
                 .Include(bgnp => bgnp.BoardGameNightPlayer)
+                .Include(bgnp2 => bgnp2.BoardGameNightBoardGame)
                 .AsNoTracking().ToListAsync();
         }
 
@@ -68,6 +69,7 @@ namespace Avans.GameNight.Infrastructure.EntityFramework.Repository
             {
                 return await _appDbContext.BoardGameNight
              .Include(bgnp => bgnp.BoardGameNightPlayer)
+             .Include(bgnp1 => bgnp1.BoardGameNightBoardGame)
              .Where(bgnp2 => bgnp2.Host == hostName)
              .AsNoTracking().ToListAsync();
              

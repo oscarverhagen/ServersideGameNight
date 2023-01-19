@@ -53,7 +53,7 @@ namespace Avans.GameNight.Infrastructure.EntityFramework.Repository
 
         public async Task<List<BoardGame>> GetBoardGames()
         {
-            return await _appDbContext.BoardGame.ToListAsync();
+            return await _appDbContext.BoardGame.AsNoTracking().ToListAsync();
         }
 
         public Task UpdateBoardGame(BoardGame boardGame)
