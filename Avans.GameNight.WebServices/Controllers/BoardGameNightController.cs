@@ -1,4 +1,5 @@
-﻿using Avans.GameNight.Infrastructure.EntityFramework.Interfaces;
+﻿using Avans.GameNight.Core.Domain.Models;
+using Avans.GameNight.Infrastructure.EntityFramework.Interfaces;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -29,10 +30,10 @@ namespace Avans.GameNight.WebServices.Controllers
 
         // GET: api/<GameNightController>
         [HttpGet]
-        public async Task<IEnumerable<BoardGameNightController>> Get()
+        public async Task<IList<BoardGameNight>> Get()
         {
             var gameNights = await _boardGameNightRepo.GetBoardGameNights();
-            return null;
+            return gameNights;
         }
     }
 }
