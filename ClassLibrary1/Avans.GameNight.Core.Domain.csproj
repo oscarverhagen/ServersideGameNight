@@ -24,7 +24,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Avans.GameNight.Tests\Avans.GameNight.Tests.csproj" />
-    <ProjectReference Include="..\Avans.GameNight2.InfraStructure.WebServices\Avans.GameNight.InfraStructure.WebServices.csproj" />
   </ItemGroup>
 
 </Project>

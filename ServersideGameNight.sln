@@ -5,15 +5,15 @@ VisualStudioVersion = 17.1.32421.90
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Avans.GameNight.App", "ServersideGameNight\Avans.GameNight.App.csproj", "{5BC213E4-89E5-4ADA-A93B-B21494EAA134}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Avans.GameNight.Tests", "Avans.GameNight.Tests\Avans.GameNight.Tests.csproj", "{94124E1B-5087-42DF-955B-5CE3D69F889E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Avans.GameNight.Tests", "Avans.GameNight.Tests\Avans.GameNight.Tests.csproj", "{94124E1B-5087-42DF-955B-5CE3D69F889E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Avans.GameNight.Core.Domain", "ClassLibrary1\Avans.GameNight.Core.Domain.csproj", "{D80769D0-6515-4A25-B702-1D84C701C3BD}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Avans.GameNight.Core.Domain", "ClassLibrary1\Avans.GameNight.Core.Domain.csproj", "{D80769D0-6515-4A25-B702-1D84C701C3BD}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Avans.GameNight.Core.DomainServices", "Avans.GameNight.Core.DomainServices\Avans.GameNight.Core.DomainServices.csproj", "{A7A54BC5-3436-484A-BCD9-DE8A2F940BE9}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Avans.GameNight.Core.DomainServices", "Avans.GameNight.Core.DomainServices\Avans.GameNight.Core.DomainServices.csproj", "{A7A54BC5-3436-484A-BCD9-DE8A2F940BE9}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Avans.GameNight.Infrastructure.EntityFramework", "Avans.GameNight.Infrastructure.EntityFramework\Avans.GameNight.Infrastructure.EntityFramework.csproj", "{ADE6F240-88BB-4343-B6F8-1415BC652A5C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Avans.GameNight.Infrastructure.EntityFramework", "Avans.GameNight.Infrastructure.EntityFramework\Avans.GameNight.Infrastructure.EntityFramework.csproj", "{ADE6F240-88BB-4343-B6F8-1415BC652A5C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Avans.GameNight.InfraStructure.WebServices", "Avans.GameNight2.InfraStructure.WebServices\Avans.GameNight.InfraStructure.WebServices.csproj", "{9DB05FED-3AFC-4667-AAC9-7DDBF1F5D2AD}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Avans.GameNight.WebServices", "Avans.GameNight.WebServices\Avans.GameNight.WebServices.csproj", "{6E8DFB29-12F8-4A8C-9309-B7C1326C6B97}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -41,10 +41,10 @@ Global
 		{ADE6F240-88BB-4343-B6F8-1415BC652A5C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{ADE6F240-88BB-4343-B6F8-1415BC652A5C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{ADE6F240-88BB-4343-B6F8-1415BC652A5C}.Release|Any CPU.Build.0 = Release|Any CPU
-		{9DB05FED-3AFC-4667-AAC9-7DDBF1F5D2AD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{9DB05FED-3AFC-4667-AAC9-7DDBF1F5D2AD}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{9DB05FED-3AFC-4667-AAC9-7DDBF1F5D2AD}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{9DB05FED-3AFC-4667-AAC9-7DDBF1F5D2AD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6E8DFB29-12F8-4A8C-9309-B7C1326C6B97}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6E8DFB29-12F8-4A8C-9309-B7C1326C6B97}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6E8DFB29-12F8-4A8C-9309-B7C1326C6B97}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6E8DFB29-12F8-4A8C-9309-B7C1326C6B97}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
