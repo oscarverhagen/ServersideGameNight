@@ -55,7 +55,7 @@ namespace Avans.GameNight.App.Controllers
                 }
             }
                 ModelState.AddModelError("LoginError", "Email/wachtwoord is onjuist");
-            TempData["ErrorMessage"] = "Error login";
+            TempData["ErrorMessage"] = "Error wrong password or email";
             return View(loginModel);
             }
         public async Task<IActionResult> Logout()

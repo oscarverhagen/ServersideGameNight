@@ -19,9 +19,9 @@ html {
 */
 body {
     margin-bottom: 60px;
-    background-color: hsl(31, 45%, 75%);
+    background-color: #F0CEA3;
+    /*    hsl(31, 45%, 75%);*/
     /*background-image: url('https://wallpaperaccess.com/full/1353542.jpg');*/
-    
 }
 /*
 .header {
