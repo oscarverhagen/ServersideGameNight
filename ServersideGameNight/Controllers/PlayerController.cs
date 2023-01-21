@@ -80,6 +80,8 @@ namespace Avans.GameNight.App.Controllers
             //{
             await _playerRepo.UpdatePlayer(playerTemp);
             //}
+
+            TempData["SuccessMessage"] = "Succes Edit! "+playerTemp.MailAddress;
             return RedirectToAction("Profile", new { MailAdress = playerTemp.MailAddress });
 
         }

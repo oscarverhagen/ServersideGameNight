@@ -29,7 +29,37 @@ namespace Avans.GameNight.WebServices.Controllers
 
         }
 
-        
-       
+        // POST api/<GameNightPlayerController>
+        [HttpPost]
+        public async Task<ActionResult> Post([FromBody] BoardGameNightPlayer gameNightPlayer)
+        {
+            try
+            {
+                var gamenight = await _boardGameNightRepo.GetBoardGameNightByName(gameNightPlayer.BoardGameNightNameNight);
+
+               
+
+                var player = await _playerRepo.GetPlayerByMailAdress(gameNightPlayer.PlayerMailAddress);
+                if (player == null)
+                {
+                    return NotFound("Player not found");
+                }
+                if (player.MailAddress == gamenight.Host)
+                {
+                    return BadRequest("Cannot join own gamenight");
+                }
+                await _boardGameNightPlayerRepo.AddBoardGameNightPlayer(gameNightPlayer);
+                return Ok("Succesfully joined the gamenight");
+                //return RedirectToAction(routeName);
+            }
+            catch (Exception ex)
+            {
+                //TempData["ErrorMessage"] = ex.Message;
+                return BadRequest(ex.Message);
+
+            }
+
+        }
+
     }
 }

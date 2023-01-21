@@ -13,11 +13,18 @@ namespace ServersideGameNight.Controllers
             _logger = logger;
         }
 
+
+        public IActionResult LoginIndex()
+        {
+            return View();
+        }
+
         public IActionResult Index()
         {
             return View();
         }
 
+      
         public IActionResult CreateGame()
         {
             return View();
