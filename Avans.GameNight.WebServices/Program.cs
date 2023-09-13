@@ -1,15 +1,11 @@
 
-using Avans.GameNight.Core.DomainServices.Interfaces;
 using Avans.GameNight.Infrastructure.EntityFramework.DataContext;
 using Avans.GameNight.Infrastructure.EntityFramework.Interfaces;
 using Avans.GameNight.Infrastructure.EntityFramework.Repository;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
-
 var builder = WebApplication.CreateBuilder(args);
-
-
 
 // Add services to the container.
 builder.Services.AddScoped<IBoardGameNightRepository, BoardGameNightRepository>();
@@ -17,7 +13,6 @@ builder.Services.AddScoped<IBoardGameNightPlayerRepository, BoardGameNightPlayer
 builder.Services.AddScoped<IBoardGameNightBoardGameRepository, BoardGameNightBoardGameRepository>();
 builder.Services.AddScoped<IBoardGameRepository, BoardGameRepository>();
 builder.Services.AddScoped<IPlayerRepository, PlayerRepository>();
-
 
 builder.Services.AddControllersWithViews();
 builder.Services.AddDbContext<AppDbContext>(options => options.UseSqlServer(
@@ -40,12 +35,7 @@ builder.Services.Configure<IdentityOptions>(options =>
 
 
 
-//builder.Services.AddScoped<IGameRepository, EGameRepository>();
-
-
-
 var app = builder.Build();
-
 
 
 // Configure the HTTP request pipeline.
@@ -74,7 +64,7 @@ app.UseAuthorization();
 
 app.MapControllerRoute(
     name: "default",
-    pattern: "{controller=Account}/{action=Login}/{id?}");
+    pattern: "{controller=Home}/{action=Index}/{id?}");
 
 
 

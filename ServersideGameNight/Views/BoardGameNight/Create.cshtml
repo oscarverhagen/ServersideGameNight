@@ -2,135 +2,66 @@
 @using Avans.GameNight.App.Models
 @using Avans.GameNight.Core.Domain.Models
 @{
-    ViewData["Title"] = "Create";
+    ViewData["Title"] = "Create Board Game Night";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h1>Create</h1>
+<h2>Create Board Game Night</h2>
 
-<h4>BoardGameNight</h4>
-<hr />
 <div class="row">
-    <div class="col-md-4">
-        <form asp-action="Create">
+    <div class="col-md-6">
+        <form asp-action="Create" class="needs-validation" novalidate>
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="form-group">
-                <label asp-for="NameNight" class="control-label"></label>
-                <input asp-for="NameNight" class="form-control" />
-                <span asp-validation-for="NameNight" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-              @*  <label asp-for="Host" class="control-label"></label>*@
-                <input asp-for="Host" class="form-control" hidden/>
-                <span asp-validation-for="Host" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-             @*   <label asp-for="TotalPlayers" class="control-label"></label>*@
-                <input asp-for="TotalPlayers" class="form-control" hidden/>
-                <span asp-validation-for="TotalPlayers" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="MaxPlayers" class="control-label"></label>
-                <input asp-for="MaxPlayers" class="form-control" />
-                <span asp-validation-for="MaxPlayers" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="DateTime" class="control-label"></label>
-                <input asp-for="DateTime" class="form-control" />
-                <span asp-validation-for="DateTime" class="text-danger"></span>
-            </div>
-       @*  <br />
-            <label asp-for="BoardGameNightBoardGame" class="control-label"></label>
-               
-         <div>
-          <select required class="form-select" multiple >
-                   
-
-                     @foreach (BoardGame item in ViewBag.BoardGamesList)
-                    {
-                          <option value="@item.NameGame">@item.NameGame - @item.KindOfGame - @item.Desciption - @item.Genre - @(item.Mature ? "18+" : "16+") </option>
-                          
-                    }
-            
-                    
-                </select>
-                <span asp-validation-for="BoardGameNightBoardGame" class="text-danger"></span>
-        </div>*@
-         @*   <div class="form-group">
-                <label asp-for="BoardGame" class="control-label"></label>
-                 <select asp-for="BoardGameNightBoardGame" class="form-control" asp-items="new SelectList(ViewBag.BoardGamesList)">
-                    <option selected="selected" >Please select</option>
-                     @foreach (BoardGame item in ViewBag.BoardGamesList)
-                    {
-                        <option value="@item.NameGame" >@item.Mature</option>
-                    }
-                </select>
-                <span asp-validation-for="BoardGame" class="text-danger"></span>
-            </div>*@
-
-@*
-            <div class="form-group">
-                <label asp-for="Boardgames" class="control-label"></label>
-                 <select required asp-for="Boardgames" class="form-control">
-                   <option selected="selected" >Please select</option>
-                    @foreach (BoardGame item in ViewBag.BoardGamesList)
-                    {
-                        <option value="@item.NameGame" >@item.NameGame</option>
-                    }
-                </select>
-                <span asp-validation-for="Boardgames" class="text-danger"></span>
-            </div>*@
 
             <div class="form-group">
-                <label asp-for="Adress" class="control-label"></label>
-                <input asp-for="Adress" class="form-control" />
-                <span asp-validation-for="Adress" class="text-danger"></span>
+                <label for="NameNight">Board Game Night Name</label>
+                <input asp-for="NameNight" class="form-control" required />
+                <div class="invalid-feedback">Please provide a name for the board game night.</div>
             </div>
+
             <div class="form-group">
-                <label asp-for="Food" class="control-label"></label>
-                <input asp-for="Food" class="form-control" />
-                <span asp-validation-for="Food" class="text-danger"></span>
+                <label for="MaxPlayers">Maximum Number of Players</label>
+                <input asp-for="MaxPlayers" class="form-control" required />
+                <div class="invalid-feedback">Please specify the maximum number of players.</div>
             </div>
+
             <div class="form-group">
-                <label asp-for="Drink" class="control-label"></label>
-                <input asp-for="Drink" class="form-control" />
-                <span asp-validation-for="Drink" class="text-danger"></span>
+                <label for="DateTime">Date and Time</label>
+                <input asp-for="DateTime" class="form-control" type="datetime-local" required />
+                <div class="invalid-feedback">Please choose a date and time.</div>
             </div>
+
             <div class="form-group">
-              
-                <input asp-for="Ratings" class="form-control" hidden/>
-                <span asp-validation-for="Ratings" class="text-danger"></span>
+                <label for="Adress">Address</label>
+                <input asp-for="Adress" class="form-control" required />
+                <div class="invalid-feedback">Please provide an address.</div>
             </div>
-              <br />
+
+            <div class="form-group">
+                <label for="Food">Food</label>
+                <input asp-for="Food" class="form-control" required />
+                <div class="invalid-feedback">Please specify the food options.</div>
+            </div>
+
+            <div class="form-group">
+                <label for="Drink">Drink</label>
+                <input asp-for="Drink" class="form-control" required />
+                <div class="invalid-feedback">Please specify the drink options.</div>
+            </div>
+
             <div class="form-group form-check">
-                <label class="form-check-label">
-                    <input class="form-check-input" asp-for="Mature" /> 18+
-                </label>
+                <input class="form-check-input" asp-for="Mature" />
+                <label class="form-check-label" for="Mature">18+ Only</label>
             </div>
 
-             <div class="form-group">
-              
-                <input asp-for="BoardGameNightBoardGame" class="form-control" hidden/>
-                <span asp-validation-for="Ratings" class="text-danger"></span>
-            </div>
-
-              <div class="form-group">
-              
-                <input asp-for="BoardGameNightPlayer" class="form-control" hidden/>
-                <span asp-validation-for="Ratings" class="text-danger"></span>
-            </div>
-            <br />
             <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" style="background-image: url('https://wallpaperaccess.com/full/3405912.jpg'); border-color:  hsl(32, 45%, 25%);"  />
+                <button type="submit" class="btn btn-primary" style="background-color: hsl(32, 45%, 25%);border-color:hsl(32, 45%, 25%);">
+                    Create Board Game Night
+                </button>
+                <a asp-area="" asp-controller="BoardGameNight" asp-action="Index" class="btn btn-secondary">
+                    Back to List
+                </a>
             </div>
         </form>
     </div>
 </div>
-<br />
-<div>
-       <a  asp-area="" asp-controller="BoardGameNight" asp-action="Index"><input type="submit" value="Back to list" class="btn btn-primary" style="background-image: url('https://wallpaperaccess.com/full/3405912.jpg'); border-color:  hsl(32, 45%, 25%);"  /></a> 
-</div>
-
-@section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
-}

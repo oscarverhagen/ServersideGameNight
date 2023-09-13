@@ -16,31 +16,31 @@
         <form asp-action="Edit">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
-             
-                <input asp-for="Name" class="form-control" hidden/>
+
+                <input asp-for="Name" class="form-control" hidden />
                 <span asp-validation-for="Name" class="text-danger"></span>
             </div>
             <div class="form-group">
-         
-                <input asp-for="MailAddress" class="form-control" hidden/>
+
+                <input asp-for="MailAddress" class="form-control" hidden />
                 <span asp-validation-for="MailAddress" class="text-danger"></span>
             </div>
             <div class="form-group">
-              
-                <input asp-for="BirthDate" class="form-control" hidden/>
+
+                <input asp-for="BirthDate" class="form-control" hidden />
                 <span asp-validation-for="BirthDate" class="text-danger"></span>
             </div>
 
-                <div class="form-group">
-              
-                <input asp-for="BoardGameNightPlayer" class="form-control" hidden/>
+            <div class="form-group">
+
+                <input asp-for="BoardGameNightPlayer" class="form-control" hidden />
                 <span asp-validation-for="BoardGameNightPlayer" class="text-danger"></span>
             </div>
 
             <div class="form-group">
                 <label asp-for="alert" class="control-label"></label>
-                 <select required asp-for="alert" class="form-control" asp-items="Html.GetEnumSelectList<Alert>()">
-                    <option selected="selected" >Please select</option>
+                <select required asp-for="alert" class="form-control" asp-items="Html.GetEnumSelectList<Alert>()">
+                    <option selected="selected">Please select</option>
                 </select>
 
                 <span asp-validation-for="alert" class="text-danger"></span>
@@ -48,15 +48,15 @@
 
             <div class="form-group">
                 <label asp-for="gender" class="control-label"></label>
-                 <select required asp-for="gender" class="form-control" asp-items="Html.GetEnumSelectList<Gender>()">
-                    <option selected="selected" >Please select</option>
+                <select required asp-for="gender" class="form-control" asp-items="Html.GetEnumSelectList<Gender>()">
+                    <option selected="selected">Please select</option>
                 </select>
                 <span asp-validation-for="gender" class="text-danger"></span>
             </div>
             <div class="form-group">
-          @*      <label asp-for="role" class="control-label"></label>*@
-                  <select required asp-for="role" class="form-control" asp-items="Html.GetEnumSelectList<Role>()" hidden>
-                    <option selected="selected" >Please select</option>
+                @*      <label asp-for="role" class="control-label"></label>*@
+                <select required asp-for="role" class="form-control" asp-items="Html.GetEnumSelectList<Role>()" hidden>
+                    <option selected="selected">Please select</option>
                 </select>
                 <span asp-validation-for="role" class="text-danger"></span>
             </div>
@@ -67,7 +67,7 @@
             </div>
             <div class="form-group form-check">
                 <label class="form-check-label">
-                    <input class="form-check-input" asp-for="Mature" hidden/> @*@Html.DisplayNameFor(model => model.Mature)*@
+                    <input class="form-check-input" asp-for="Mature" hidden /> @*@Html.DisplayNameFor(model => model.Mature)*@
                 </label>
             </div>
             <div class="form-group">
@@ -87,21 +87,16 @@
             </div>
             <div class="form-group">
                 @*<label asp-for="NotShow" class="control-label"></label>*@
-                <input asp-for="NotShow" class="form-control" hidden/>
+                <input asp-for="NotShow" class="form-control" hidden />
                 <span asp-validation-for="NotShow" class="text-danger"></span>
             </div>
             <br />
             <div class="form-group">
-                <input type="submit" value="Save" class="btn btn-primary" style="background-image: url('https://wallpaperaccess.com/full/3405912.jpg'); border-color:  hsl(32, 45%, 25%);"  />
-                 
-                 <a asp-action="Profile"><input type="submit" value="Back" class="btn btn-primary" style="background-image: url('https://wallpaperaccess.com/full/3405912.jpg'); border-color:  hsl(32, 45%, 25%);"  /></a>
+                <input type="submit" value="Save" class="btn btn-primary" style="background-image: url('https://wallpaperaccess.com/full/3405912.jpg'); border-color:  hsl(32, 45%, 25%);" />
+
+                <a asp-action="Profile"><input type="submit" value="Back" class="btn btn-primary" style="background-image: url('https://wallpaperaccess.com/full/3405912.jpg'); border-color:  hsl(32, 45%, 25%);" /></a>
             </div>
         </form>
     </div>
 </div>
 <br>
-
-
-@section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
-}

@@ -1,119 +1,79 @@
 ﻿@model IEnumerable<Avans.GameNight.Core.Domain.Models.BoardGame>
 @using Avans.GameNight.App.Models
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "Boardgames";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h1>Boardgames:</h1>
+<h1 class="mb-4">Boardgames</h1>
+
+<div class="table-responsive">
+    <table class="table table-striped">
+        <thead class="thead-dark">
 
 
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.NameGame)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Genre)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Mature)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Desciption)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.KindOfGame)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Picture)
-            </th>
+            <tr>
+                <th>Game Name</th>
+                <th>Genre</th>
+                <th>Mature</th>
+                <th>Description</th>
+                <th>Type of Game</th>
+                <th>Picture</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>@Html.DisplayFor(modelItem => item.NameGame)</td>
+                    <td>@Html.DisplayFor(modelItem => item.Genre)</td>
+                    <td>@(item.Mature ? "Yes" : "No")</td>
+                    <td>@Html.DisplayFor(modelItem => item.Desciption)</td>
+                    <td>@Html.DisplayFor(modelItem => item.KindOfGame)</td>
+                    <td><img src="data:@item.PictureFormat;base64,@Convert.ToBase64String(item.PictureB)" width="70" height="70"></td>
+                    <td>
+                        <button class="btn btn-danger" onclick="deleteConfirm('@item.NameGame')">Delete</button>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
 
-        </tr>
-    </thead>
-    <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.NameGame)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Genre)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Mature)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Desciption)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.KindOfGame)
-            </td>
-             <td>
-              
-                
-                 <img src="data:@item.PictureFormat;base64,@Convert.ToBase64String(item.PictureB)" width="70" height = "70">
-    
-
-            </td>
-     
-            <td>
-               @*  <a  asp-area="" asp-controller="BoardGame" asp-action="Edit" asp-route-nameGame="@item.NameGame"><input type="submit" value="Edit"  class="btn btn-primary"style="background-image: url('https://wallpaperaccess.com/full/3405912.jpg'); border-color:  hsl(32, 45%, 25%);" /></a>  |*@
-                 
-           <input type="button" value="Delete" class="btn btn-danger"  onclick="deleteConfirm('@item.NameGame')" style="background-image: url('https://c1.wallpaperflare.com/preview/199/949/128/background-red-gloss-art.jpg'); border-color:  hsl(32, 45%, 25%);"  />
-       
-            </td>
-
-           
-        </tr>
-}
-    </tbody>
-</table>
- <p>
-     <a  asp-area="" asp-controller="BoardGame" asp-action="Create"><input type="submit" value="Create New" class="btn btn-primary" style="background-image: url('https://wallpaperaccess.com/full/3405912.jpg'); border-color:  hsl(32, 45%, 25%);" /></a> 
+<p>
+    <a asp-area="" asp-controller="BoardGame" asp-action="Create" class="btn btn-primary" style="background-color: hsl(32, 45%, 25%);border-color:hsl(32, 45%, 25%);">Create New</a>
 </p>
 
-<div class="modal fade" id="delete-conformation" tabindex="-1" role="dialog" aria-labelledby="deleteconformation">
-    <div class="modal-dialog" style="width:501px !important;margin:0 auto;">
+<!-- Modal -->
+<div class="modal fade" id="delete-confirmation" tabindex="-1" role="dialog" aria-labelledby="deleteConfirmationTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
-            <div class="modal-header" style="background:#d9534f;color:white;">
-                <h4 class="modal-title" id="delete-conformation">
-                    Delete Confirmation
-                </h4>
+            <div class="modal-header">
+                <h5 class="modal-title" id="deleteConfirmationTitle">Delete Confirmation</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
             </div>
             <div class="modal-body">
-                <div class="row">
-                    <div class="form-group">
-                        <div class="col-sm-12">
-                            <span>
-                                Are you sure you want to delete this boardgame?
-                            </span>
-                            <strong id="deletedValueName">
-                            </strong>
-                        </div>
-                    </div>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
-                    <form id="delete-route"  asp-action="Delete"  asp-route-id="">
-                        <input type="hidden" id="modal-delete-id" name="name" value="" />
-                        <input type="submit"  class="btn btn-danger" value="Delete" />
-                    </form>
-                </div>
+                Are you sure you want to delete "<span id="deletedValueName"></span>"?
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                <a id="delete-route" href="#" class="btn btn-danger">Delete</a>
             </div>
         </div>
     </div>
 </div>
 
-@section Scripts{
+@section Scripts {
     <script type="text/javascript">
-        //this is only display bootstrap modal pop up dialog
         var deleteConfirm = function (val) {
             $('#deletedValueName').text(val);
-            $('#modal-delete-id').attr('value',val);
-            $('#delete-conformation').modal('show');
-            $('#delete-route').attr('href', 'BoardGame/Delete/' + val);
+            $('#delete-route').attr('href', '@Url.Action("Delete", "BoardGame")/' + encodeURIComponent(val));
+            $('#delete-confirmation').modal('show');
         }
     </script>
+
+
 }

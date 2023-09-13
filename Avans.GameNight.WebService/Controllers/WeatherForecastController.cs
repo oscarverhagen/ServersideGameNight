@@ -1,6 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
 
-namespace Avans.GameNight2.InfraStructure.WebServices.Controllers
+namespace Avans.GameNight.WebService.Controllers
 {
     [ApiController]
     [Route("[controller]")]
@@ -18,5 +18,16 @@ namespace Avans.GameNight2.InfraStructure.WebServices.Controllers
             _logger = logger;
         }
 
+        [HttpGet(Name = "GetWeatherForecast")]
+        public IEnumerable<WeatherForecast> Get()
+        {
+            return Enumerable.Range(1, 5).Select(index => new WeatherForecast
+            {
+                Date = DateTime.Now.AddDays(index),
+                TemperatureC = Random.Shared.Next(-20, 55),
+                Summary = Summaries[Random.Shared.Next(Summaries.Length)]
+            })
+            .ToArray();
+        }
     }
 }

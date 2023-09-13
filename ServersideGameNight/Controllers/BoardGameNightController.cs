@@ -57,6 +57,7 @@ namespace Avans.GameNight.App.Controllers
                 var user = await _userManager.GetUserAsync(User);
                 var boardGames = await _boardGameRepo.GetBoardGames();
                 var BoardGameNight = await _boardGameNightRepo.GetBoardGameNightByName(nameNight);
+               
 
 
                 ViewBag.BoardGames = boardGames;
@@ -67,6 +68,8 @@ namespace Avans.GameNight.App.Controllers
                     throw new Exception("Youre not the Owner!");
                 }
 
+               
+
                 //BoardGameNightBoardGame maken
                 var newBoardGame = new BoardGameNightBoardGame()
                 {
@@ -74,7 +77,15 @@ namespace Avans.GameNight.App.Controllers
                     BoardGameNightNameNight = BoardGameNight.NameNight,
                 };
 
-               
+                var oldBoardGame = await _boardGameNightBoardGameRepo.GETBGNByBoardGameName(newBoardGame.BoardGameNameGame);
+
+                var boardGameExists = oldBoardGame.FirstOrDefault(bgnp => bgnp.BoardGameNightNameNight == nameNight);
+                if (boardGameExists != null)
+                {
+                    throw new Exception("BoardGame already added");
+                }
+
+
                 if (BoardGameNight.BoardGameNightBoardGame == null||!BoardGameNight.BoardGameNightBoardGame.Contains(newBoardGame))
                 {
                     BoardGameNight.BoardGameNightBoardGame?.Add(newBoardGame);
@@ -82,14 +93,15 @@ namespace Avans.GameNight.App.Controllers
                     await _boardGameNightBoardGameRepo.AddBoardGameNightBoardGame(newBoardGame);
                 }
 
-
+                TempData["SuccessMessage"] = "Successfully Added: "+newBoardGame.BoardGameNameGame;
                 return RedirectToAction("MyBoardGameNights");
 
             }
-                catch (ArgumentException)
+                catch (Exception ex)
                     {
-                        return this.NotFound("The user is not found.");
-                    }
+                TempData["ErrorMessage"] = "Error "+ex.Message;
+                return RedirectToAction("MyBoardGameNights");
+            }
         }
 
 
@@ -142,6 +154,8 @@ namespace Avans.GameNight.App.Controllers
                 var user = await _userManager.GetUserAsync(User);
                 var player1 = await _playerRepo.GetPlayerByMailAdress(user.Email);
                 var gameNight = await _boardGameNightRepo.GetBoardGameNightByName(nameNight);
+                var oldPlayer = await _boardGameNightPlayerRepo.GetBoardGameNightPlayersByName(user.Email);
+
 
                 if (player1 == null)
                 {
@@ -149,12 +163,18 @@ namespace Avans.GameNight.App.Controllers
                     
                 }
 
-                if (player1.MailAddress == gameNight.Host)
+                if (user.Email == gameNight.Host)
                 {
-                    throw new Exception("Cannot join own gamenight");
+                    throw new Exception("Cannot join own GameNight");
 
                 }
 
+
+                var playerExists = oldPlayer.FirstOrDefault(bgnp => bgnp.BoardGameNightNameNight == nameNight);
+                if (playerExists != null)
+                {
+                    throw new Exception("Youre already in this GameNight");
+                }
 
                 //Nieuwe boardgamenightplayer toevoegen door boardgame id/string op te halen + ingelogde gebruiker
                 //Dan via repository deze inserrten in database
@@ -164,16 +184,22 @@ namespace Avans.GameNight.App.Controllers
                     {
                         throw new Exception("GameNight is full");
                     }
+                    
                     gameNight.TotalPlayers = gameNight.TotalPlayers + 1;
 
                     //BoardGameNightPlayer maken
                     var newPlayer = new BoardGameNightPlayer()
                     {
-                        PlayerMailAddress = player1.MailAddress,
+                        PlayerMailAddress = user.Email,
                         BoardGameNightNameNight = gameNight.NameNight,
                     };
+
                    
-                    if ((gameNight.BoardGameNightPlayer == null) || !gameNight.BoardGameNightPlayer.Contains(newPlayer)) 
+                    if (gameNight.BoardGameNightPlayer.Contains(newPlayer))
+                        {
+                        throw new Exception("Already in this gamenight");
+                    }
+                        if ((gameNight.BoardGameNightPlayer == null) || !gameNight.BoardGameNightPlayer.Contains(newPlayer)) 
                     {
                        gameNight.BoardGameNightPlayer?.Add(newPlayer);
                         await _boardGameNightRepo.UpdateBoardGameNight(gameNight);
@@ -191,14 +217,16 @@ namespace Avans.GameNight.App.Controllers
                 //Speler toevoegen aan de list van gamenight
                 //gameNight.BoardGameNightPlayer.Add(user);
 
-               
+                TempData["SuccessMessage"] = "Successfully joined: " + gameNight.NameNight;
                 return RedirectToAction("Index");
 
 
             }
-            catch (ArgumentException)
+            catch (Exception ex)
             {
-                return this.NotFound("The user is not found.");
+                TempData["ErrorMessage"] = ex.Message;
+
+                return RedirectToAction("Index");
             }
 
         }
@@ -251,15 +279,16 @@ namespace Avans.GameNight.App.Controllers
                 }
 
 
-           
 
+                TempData["SuccessMessage"] = "Successfully leaved: " + gameNight.NameNight;
                 return RedirectToAction("Index");
 
 
             }
-            catch (ArgumentException)
+            catch (Exception ex)
             {
-                return this.NotFound("The user is not found.");
+                TempData["ErrorMessage"] = ex.Message;
+                return RedirectToAction("Index");
             }
 
         }
@@ -310,6 +339,7 @@ namespace Avans.GameNight.App.Controllers
                     await _boardGameNightPlayerRepo.UpdateBoardGameNightPlayer(newPlayer2);
                 //}
 
+                TempData["SuccessMessage"] = "Successfully Created BoardGameNight: "+boardGameNight.NameNight;
                 return RedirectToAction("Index");
               
 

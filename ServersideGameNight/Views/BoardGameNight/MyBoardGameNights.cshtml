@@ -3,111 +3,62 @@
 @using Avans.GameNight.Core.Domain.Models
 
 @{
-    ViewData["Title"] = "MyBoardGameNights";
+    ViewData["Title"] = "My Board Game Nights";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h1>MyBoardGameNights</h1>
+<h1>My Board Game Nights</h1>
 
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.NameNight)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Host)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.TotalPlayers)
-            </th>
-            <th>
-                Players:
-            </th>
-
-            <th>
-                BoardGames:
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.DateTime)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Adress)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Mature)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Food)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Drink)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Ratings)
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.NameNight)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Host)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.TotalPlayers)
-            </td>
-             <td>
-                    @if (item.BoardGameNightPlayer != null)
-                    {
-                        @foreach (BoardGameNightPlayer a in item.BoardGameNightPlayer)
-                    {
-                @Html.DisplayFor(modelItem => a.PlayerMailAddress)
-                <br />
-                    }
-                    }
-                
-            </td>
-
-               <td>
-                    @if (item.BoardGameNightBoardGame != null)
-                    {
-                        @foreach (BoardGameNightBoardGame a2 in item.BoardGameNightBoardGame)
-                    {
-                @Html.DisplayFor(modelItem => a2.BoardGameNameGame)
-                <br />
-                    }
-                    }
-                
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.DateTime)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Adress)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Mature)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Food)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Drink)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Ratings)
-            </td>
-           <td>
-              <a asp-controller="BoardGameNight" asp-action="AddBoardGame" asp-route-nameNight="@item.NameNight" ><div class="form-group"><input type="submit" value="Add Boardgame" class="btn btn-danger"   style="background-image: url('https://wallpaperaccess.com/full/3405912.jpg'); border-color:  hsl(32, 45%, 25%);"   /></div></a>
-       
-
-            </td>
-        </tr>
-}
-    </tbody>
-</table>
+<div class="table-responsive">
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>@Html.DisplayNameFor(model => model.NameNight)</th>
+                <th>@Html.DisplayNameFor(model => model.Host)</th>
+                <th>@Html.DisplayNameFor(model => model.TotalPlayers)</th>
+                <th>Players</th>
+                <th>Board Games</th>
+                <th>@Html.DisplayNameFor(model => model.DateTime)</th>
+                <th>@Html.DisplayNameFor(model => model.Adress)</th>
+                <th>@Html.DisplayNameFor(model => model.Mature)</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>@Html.DisplayFor(modelItem => item.NameNight)</td>
+                    <td>@Html.DisplayFor(modelItem => item.Host)</td>
+                    <td>@Html.DisplayFor(modelItem => item.TotalPlayers)</td>
+                    <td>
+                        @if (item.BoardGameNightPlayer != null)
+                        {
+                            foreach (BoardGameNightPlayer a in item.BoardGameNightPlayer)
+                            {
+                                <div>@Html.DisplayFor(modelItem => a.PlayerMailAddress)</div>
+                            }
+                        }
+                    </td>
+                    <td>
+                        @if (item.BoardGameNightBoardGame != null)
+                        {
+                            foreach (BoardGameNightBoardGame a2 in item.BoardGameNightBoardGame)
+                            {
+                                <div>@Html.DisplayFor(modelItem => a2.BoardGameNameGame)</div>
+                            }
+                        }
+                    </td>
+                    <td>@Html.DisplayFor(modelItem => item.DateTime)</td>
+                    <td>@Html.DisplayFor(modelItem => item.Adress)</td>
+                    <td>@Html.DisplayFor(modelItem => item.Mature)</td>
+                    <td>
+                        <a asp-controller="BoardGameNight" asp-action="AddBoardGame" asp-route-nameNight="@item.NameNight" class="btn btn-danger" style="background-color: hsl(32, 45%, 25%);border-color:hsl(32, 45%, 25%);">
+                            Add Boardgame
+                        </a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

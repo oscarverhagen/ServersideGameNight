@@ -23,7 +23,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Avans.GameNight2.InfraStructure.WebServices\Avans.GameNight.InfraStructure.WebServices.csproj" />
     <ProjectReference Include="..\ClassLibrary1\Avans.GameNight.Core.Domain.csproj" />
   </ItemGroup>
 

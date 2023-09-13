@@ -106,14 +106,15 @@ namespace Avans.GameNight.App.Controllers
 
                     await _boardGameRepo.AddBoardGame(temp);
                 //}
-
+                TempData["SuccessMessage"] = "Successfully Created: "+temp.NameGame;
                 return RedirectToAction("Index");
 
 
             }
-            catch (ArgumentException)
+            catch (Exception ex)
             {
-                return this.NotFound("The user is not found.");
+                TempData["ErrorMessage"] = "Forum is not correct";
+                return RedirectToAction("Create");
             }
 
 
@@ -134,11 +135,13 @@ namespace Avans.GameNight.App.Controllers
                     return NotFound("The BoardGame requested to delete has not been found.");
                 }
                 await _boardGameRepo.DestroyBoardGame(game);
+                TempData["SuccessMessage"] = "Successfully Deleted: " + name;
                 return RedirectToAction("Index");
             }
-            catch (ArgumentException ex)
+            catch (Exception ex)
             {
-                return NotFound(ex.Message);
+                TempData["ErrorMessage"] = "User not found";
+                return RedirectToAction("Index");
             }
         }
     }

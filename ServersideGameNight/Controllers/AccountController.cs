@@ -49,17 +49,20 @@ namespace Avans.GameNight.App.Controllers
 
                     if (signInResult.Succeeded)
                     {
-                        return RedirectToAction("Index", "Home");
+                        TempData["SuccessMessage"] = "Success Login welcome: " + user.Email;
+                        return RedirectToAction("LoginIndex", "Home");
                     }
                 }
             }
                 ModelState.AddModelError("LoginError", "Email/wachtwoord is onjuist");
-                return View(loginModel);
+            TempData["ErrorMessage"] = "Error wrong password or email";
+            return View(loginModel);
             }
         public async Task<IActionResult> Logout()
         {
             await _signInManager.SignOutAsync();
 
+            TempData["SuccessMessage"] = "Success Logout";
             return RedirectToAction("Login");
         }
 
@@ -142,7 +145,7 @@ namespace Avans.GameNight.App.Controllers
             }
 
 
-
+            TempData["SuccessMessage"] = "Success Register";
             return RedirectToAction("Login");
         }
 

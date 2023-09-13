@@ -1,0 +1,41 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+
+<div class="text-center">
+    <h1 class="display-4">Welcome</h1>
+    <p class="lead">Welcome to the BoardGameNight Application!</p>
+    <p class="mb-4">Explore and enjoy a world of board games and game nights.</p>
+
+    <div class="container">
+        <p class="mb-2">To manage your BoardGameNights:</p>
+        <a asp-area="" asp-controller="BoardGameNight" asp-action="MyBoardGameNights" class="btn btn-primary btn-lg">My BoardGameNights</a>
+    </div>
+
+    <div class="container mt-4">
+        <p class="mb-2">Create a new BoardGameNight:</p>
+        <a asp-area="" asp-controller="BoardGameNight" asp-action="Create" class="btn btn-primary btn-lg">Create</a>
+    </div>
+
+    <div class="container mt-4">
+        <p class="mb-2">Join an existing BoardGameNight:</p>
+        <a asp-area="" asp-controller="BoardGameNight" asp-action="Index" class="btn btn-primary btn-lg">Join</a>
+    </div>
+
+    <div class="container mt-4">
+        <p class="mb-2">Discover and contribute to our boardgames collection:</p>
+        <a asp-area="" asp-controller="BoardGame" asp-action="Index" class="btn btn-primary btn-lg">BoardGames</a>
+    </div>
+</div>
+
+<style>
+    .btn-primary {
+        background-color: hsl(32, 45%, 25%);
+        border-color: hsl(32, 45%, 25%);
+    }
+
+        .btn-primary:hover {
+            background-color: hsl(32, 45%, 30%);
+            border-color: hsl(32, 45%, 30%);
+        }
+</style>
