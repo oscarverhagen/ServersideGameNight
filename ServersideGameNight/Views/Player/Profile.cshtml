@@ -5,89 +5,57 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h1>Profile</h1>
-
-<div>
-    <h4>@Model.Name</h4>
+<div class="container mt-5">
+    <h1>Profile</h1>
     <hr />
-    <dl class="row">
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Name)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Name)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.MailAddress)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.MailAddress)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.BirthDate)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.BirthDate)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.alert)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.alert)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.gender)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.gender)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.role)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.role)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Adress)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Adress)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Mature)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Mature)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.City)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.City)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.DrinkPreference)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.DrinkPreference)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.FoodPreference)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.FoodPreference)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.NotShow)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.NotShow)
-        </dd>
-    </dl>
-</div>
-<div>
-    <a  asp-area="" asp-controller="Player" asp-action="Edit"><input type="submit" value="Edit" class="btn btn-primary" style="background-image: url('https://wallpaperaccess.com/full/3405912.jpg'); border-color:  hsl(32, 45%, 25%);" /></a>
 
-      <a  asp-area="" asp-controller="Home" asp-action="Index"><input type="submit" value="Back to Main" class="btn btn-primary" style="background-image: url('https://wallpaperaccess.com/full/3405912.jpg'); border-color:  hsl(32, 45%, 25%);" /></a>
+    <div class="row">
+        <div class="col-md-8">
+            <h4>@Model.Name</h4>
+            <dl class="row">
+                <dt class="col-sm-3">Name:</dt>
+                <dd class="col-sm-9">@Html.DisplayFor(model => model.Name)</dd>
+
+                <dt class="col-sm-3">Email:</dt>
+                <dd class="col-sm-9">@Html.DisplayFor(model => model.MailAddress)</dd>
+
+                <dt class="col-sm-3">Birth Date:</dt>
+                <dd class="col-sm-9">@Html.DisplayFor(model => model.BirthDate)</dd>
+
+                <dt class="col-sm-3">Alert:</dt>
+                <dd class="col-sm-9">@Html.DisplayFor(model => model.alert)</dd>
+
+                <dt class="col-sm-3">Gender:</dt>
+                <dd class="col-sm-9">@Html.DisplayFor(model => model.gender)</dd>
+
+                <dt class="col-sm-3">Role:</dt>
+                <dd class="col-sm-9">@Html.DisplayFor(model => model.role)</dd>
+
+                <dt class="col-sm-3">Address:</dt>
+                <dd class="col-sm-9">@Html.DisplayFor(model => model.Adress)</dd>
+
+                <dt class="col-sm-3">Mature:</dt>
+                <dd class="col-sm-9">@Html.DisplayFor(model => model.Mature)</dd>
+
+                <dt class="col-sm-3">City:</dt>
+                <dd class="col-sm-9">@Html.DisplayFor(model => model.City)</dd>
+
+                <dt class="col-sm-3">Drink Preference:</dt>
+                <dd class="col-sm-9">@Html.DisplayFor(model => model.DrinkPreference)</dd>
+
+                <dt class="col-sm-3">Food Preference:</dt>
+                <dd class="col-sm-9">@Html.DisplayFor(model => model.FoodPreference)</dd>
+
+                <dt class="col-sm-3">Not Show:</dt>
+                <dd class="col-sm-9">@Html.DisplayFor(model => model.NotShow)</dd>
+            </dl>
+        </div>
+    </div>
+
+    <div class="row mt-3">
+        <div class="col-md-8">
+            <a asp-action="Edit" class="btn btn-primary" style="background-color: hsl(32, 45%, 25%);border-color:hsl(32, 45%, 25%);">Edit</a>
+            <a asp-action="LoginIndex" asp-controller="Home" class="btn btn-primary ml-2" style="background-color: hsl(32, 45%, 25%); border-color:hsl(32, 45%, 25%);">Back to Main</a>
+        </div>
+    </div>
 </div>
-@* @Html.ActionLink("Edit", "Edit", new { /* id = Model.PrimaryKey */ })*@

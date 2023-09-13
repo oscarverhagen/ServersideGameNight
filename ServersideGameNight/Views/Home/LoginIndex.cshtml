@@ -4,32 +4,38 @@
 
 <div class="text-center">
     <h1 class="display-4">Welcome</h1>
-    <p>Welcome to my BoardGameNight application!
-    </p>
-    <p>To Create Boardgames and BoardGameNights you must be 18+, if youre not 18 your only able to join BoardGameNights
-    </p>
-    <p>Have fun!</p>
-       <br />
-          <br />
-             <br />
-                 <br />
+    <p class="lead">Welcome to the BoardGameNight Application!</p>
+    <p class="mb-4">Explore and enjoy a world of board games and game nights.</p>
 
-       <div class="container">
-      <p>To see your BoardGameNights please press My BoardGameNights</p>
-<a  asp-area="" asp-controller="BoardGameNight" asp-action="MyBoardGameNights"><input type="submit" value="My BoardGameNights" class="btn btn-primary" style="background-image: url('https://wallpaperaccess.com/full/3405912.jpg'); border-color:  hsl(32, 45%, 25%);" /></a> 
+    <div class="container">
+        <p class="mb-2">To manage your BoardGameNights:</p>
+        <a asp-area="" asp-controller="BoardGameNight" asp-action="MyBoardGameNights" class="btn btn-primary btn-lg">My BoardGameNights</a>
+    </div>
+
+    <div class="container mt-4">
+        <p class="mb-2">Create a new BoardGameNight:</p>
+        <a asp-area="" asp-controller="BoardGameNight" asp-action="Create" class="btn btn-primary btn-lg">Create</a>
+    </div>
+
+    <div class="container mt-4">
+        <p class="mb-2">Join an existing BoardGameNight:</p>
+        <a asp-area="" asp-controller="BoardGameNight" asp-action="Index" class="btn btn-primary btn-lg">Join</a>
+    </div>
+
+    <div class="container mt-4">
+        <p class="mb-2">Discover and contribute to our boardgames collection:</p>
+        <a asp-area="" asp-controller="BoardGame" asp-action="Index" class="btn btn-primary btn-lg">BoardGames</a>
+    </div>
 </div>
- <br />
-  <div class="container">
-      <p>To Create a BoardGameNight please press Create</p>
-<a  asp-area="" asp-controller="BoardGameNight" asp-action="Create"><input type="submit" value="Create" class="btn btn-primary" style="background-image: url('https://wallpaperaccess.com/full/3405912.jpg'); border-color:  hsl(32, 45%, 25%);" /></a> 
-</div>
- <br />
-<div class="container">
-     <p>To Join a BoardGameNight please press Join</p>
-<a  asp-area="" asp-controller="BoardGameNight" asp-action="Index"><input type="submit" value="Join" class="btn btn-primary" style="background-image: url('https://wallpaperaccess.com/full/3405912.jpg'); border-color:  hsl(32, 45%, 25%);" /></a> 
-</div>
- <br />
-<div class="container">
-     <p>To see or create boardgames please press BoardGames</p>
-<a  asp-area="" asp-controller="BoardGame" asp-action="Index"><input type="submit" value="BoardGames" class="btn btn-primary" style="background-image: url('https://wallpaperaccess.com/full/3405912.jpg'); border-color:  hsl(32, 45%, 25%);" /></a> 
-</div>
+
+<style>
+    .btn-primary {
+        background-color: hsl(32, 45%, 25%);
+        border-color: hsl(32, 45%, 25%);
+    }
+
+        .btn-primary:hover {
+            background-color: hsl(32, 45%, 30%);
+            border-color: hsl(32, 45%, 30%);
+        }
+</style>

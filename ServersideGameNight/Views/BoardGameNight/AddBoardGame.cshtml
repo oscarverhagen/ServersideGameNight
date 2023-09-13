@@ -1,83 +1,38 @@
-﻿@model Avans.GameNight.Core.Domain.Models.BoardGameNightBoardGame;
-@using Avans.GameNight.Core.Domain.Models;
+﻿@model Avans.GameNight.Core.Domain.Models.BoardGameNightBoardGame
+@using Avans.GameNight.Core.Domain.Models
 
-<h4>Add Boardgame @ViewBag.NameNightBag  </h4>
-<br />
- <div class="form-group">
-            
-   <br />
-    <form asp-controller="BoardGameNight" asp-action="AddBoardGame" asp-route-nameNight="@ViewBag.NameNightBag" > 
-                <select required asp-for="BoardGameNameGame" class="form-select" >
-                    <option selected="selected" >Please select</option>
+@{
+    ViewData["Title"] = "Add Boardgame to " + ViewBag.NameNightBag;
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
 
-                     @foreach (BoardGame item in ViewBag.BoardGames)
-                    {
-                          <option value="@item.NameGame">@item.NameGame - @item.KindOfGame - @item.Desciption - @item.Genre - @(item.Mature ? "18+" : "16+") </option>
-                          
-                    }
-            
-                    
-                </select>
-                 <br />
-                <div class="form-group">
+<h2 class="mb-4">Add Boardgame to @ViewBag.NameNightBag</h2>
 
-                    <input type="submit" value="Add Boardgame" class="btn btn-danger"   style="background-image: url('https://wallpaperaccess.com/full/3405912.jpg'); border-color:  hsl(32, 45%, 25%);"   />
-                    </div>
-      </form>          
-            </div>
-            
-        
-  
-          
-
-
-
-@*   <html>
-<head>
-    <meta name="viewport" content="width=device-width" />
-    <title>AddGameNightBoardGame</title>
-</head>
-<body>
-
-<h4>GameNight:  </h4>
-
-<hr />
 <div class="row">
-    <div class="col-md-4">
-        <form asp-action="AddBoardGame">
-            <div asp-validation-summary="All" class="text-danger"></div>
-                @Html.HiddenFor(model => model.BoardGameNight)
-
+    <div class="col-md-6">
+        <form asp-controller="BoardGameNight" asp-action="AddBoardGame" asp-route-nameNight="@ViewBag.NameNightBag" class="needs-validation" novalidate>
             <div class="form-group">
-                <label asp-for="BoardGameNameGame" class="control-label"></label>
-                <select required asp-for="BoardGameNameGame" class="form-select" >
-                    <option selected="selected" >Please select</option>
-                        @if (ViewBag.BoardGames != null){
-                            @foreach (BoardGame item in ViewBag.BoardGames)
-                            {
-                                <option value="@item.NameGame">@item.NameGame - @item.Genre - @(item.Mature ? "18+" : "16+")</option>
-                            }
-                        }
-                        
+                <label for="BoardGameNameGame">Select a Boardgame</label>
+                <select required asp-for="BoardGameNameGame" class="form-select">
+                    <option value="" disabled>Please select</option>
+                    @foreach (BoardGame item in ViewBag.BoardGames)
+                    {
+                        <option value="@item.NameGame">
+                            @item.NameGame - @item.KindOfGame - @item.Desciption - @item.Genre - @(item.Mature ? "18+" : "16+")
+                        </option>
+                    }
                 </select>
-                <span asp-validation-for="BoardGameNameGame" class="text-danger"></span>
+                <div class="invalid-feedback">Please select a board game.</div>
             </div>
 
-
             <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
+                <button type="submit" class="btn btn-primary" style="background-color: hsl(32, 45%, 25%);border-color:hsl(32, 45%, 25%);">
+                    Add Boardgame
+                </button>
+                <a asp-area="" asp-controller="BoardGameNight" asp-action="Details" asp-route-nameNight="@ViewBag.NameNightBag" class="btn btn-secondary">
+                    Cancel
+                </a>
             </div>
         </form>
     </div>
 </div>
-
-<div>
-    <a asp-controller="BoardGameNight" asp-action="MyBoardGameNights">Back to List</a>
-</div>
-
-@section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
-}
-</body>
-</html>
-*@
