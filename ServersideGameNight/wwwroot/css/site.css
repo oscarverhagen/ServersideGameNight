@@ -13,23 +13,12 @@ html {
   min-height: 100%;
 }
 
-/*.btn-primary:hover {
-    background-color: hsl(31, 45%, 75%);
-} 
-*/
+
 body {
-    margin-bottom: 60px;
+    /*    margin-bottom: 60px;*/
     background-color: #F0CEA3;
-    /*    hsl(31, 45%, 75%);*/
-    /*background-image: url('https://wallpaperaccess.com/full/1353542.jpg');*/
 }
-/*
-.header {
-    background-color: hsl(31, 45%, 75%);
+.bigger-nav-item {
+    font-size: 18px; /* Adjust the font size as needed */
 }
-.navbar-inverse .navbar-brand {
-    color: #ff0000;
-}
-.navbar-header {
-    background-color: #333;
-}*/
+
