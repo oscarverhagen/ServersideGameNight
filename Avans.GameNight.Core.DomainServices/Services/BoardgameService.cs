@@ -1,49 +1,51 @@
 ﻿using Avans.GameNight.Core.Domain.Models;
 using Avans.GameNight.Core.DomainServices.Interfaces;
-using Avans.GameNight.Infrastructure.EntityFramework.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Avans.GameNight.Core.Domain.Interfaces;
 
 namespace Avans.GameNight.Core.DomainServices.Services
 {
     internal class BoardgameService : IBoardgameService
     {
-        private IBoardGameRepository boardGameRepository;
-        public BoardgameService(IBoardGameRepository boardgameRepository)
+       private readonly IBoardGameRepository _boardGameRepository;
+
+        public BoardgameService(IBoardGameRepository boardGameRepository)
         {
-                this.boardGameRepository = boardgameRepository;
-        }
-        public Task AddBoardGame(BoardGame boardGame)
-        {
-            throw new NotImplementedException();
+            _boardGameRepository = boardGameRepository;
         }
 
-        public Task DestroyBoardGame(BoardGame boardGame)
+        public async Task AddBoardGame(BoardGame boardGame)
         {
-            throw new NotImplementedException();
+            await _boardGameRepository.AddBoardGame(boardGame);
         }
 
-        public Task<BoardGame> GetBoardGameByName(string nameGame)
+        public async Task DestroyBoardGame(BoardGame boardGame)
         {
-            throw new NotImplementedException();
+            await _boardGameRepository.DestroyBoardGame(boardGame);
         }
 
-        public Task<List<BoardGame>> GetBoardGames()
+        public async Task<BoardGame> GetBoardGameByName(string nameGame)
         {
-            throw new NotImplementedException();
+            return await _boardGameRepository.GetBoardGameByName(nameGame);
         }
 
-        public Task UpdateBoardGame(BoardGame boardGame)
+        public async Task<List<BoardGame>> GetBoardGames()
         {
-            throw new NotImplementedException();
+            return await _boardGameRepository.GetBoardGames();
         }
 
-        public Task UpdateBoardGameByBoardGame(string nameGame, BoardGame boardGame)
+        public async Task UpdateBoardGame(BoardGame boardGame)
         {
-            throw new NotImplementedException();
+            await _boardGameRepository.UpdateBoardGame(boardGame);
+        }
+
+        public async Task UpdateBoardGameByBoardGame(string nameGame, BoardGame boardGame)
+        {
+            await _boardGameRepository.UpdateBoardGameByBoardGame(nameGame, boardGame);
         }
     }
 }

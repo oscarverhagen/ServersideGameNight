@@ -1,4 +1,4 @@
-namespace ServersideGameNight.Models
+namespace Avans.GameNight.App.Models
 {
     public class ErrorViewModel
     {

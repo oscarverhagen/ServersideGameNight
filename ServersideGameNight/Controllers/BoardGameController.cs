@@ -1,8 +1,8 @@
 ﻿using Avans.GameNight.App.Models;
+using Avans.GameNight.Core.Domain.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 using Avans.GameNight.Core.DomainServices.Interfaces;
 using Microsoft.AspNetCore.Identity;
-using Avans.GameNight.Infrastructure.EntityFramework.Interfaces;
 using Avans.GameNight.Core.Domain.Models;
 
 namespace Avans.GameNight.App.Controllers

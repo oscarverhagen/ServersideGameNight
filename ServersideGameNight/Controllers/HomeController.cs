@@ -1,8 +1,8 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using ServersideGameNight.Models;
-using System.Diagnostics;
+﻿using System.Diagnostics;
+using Avans.GameNight.App.Models;
+using Microsoft.AspNetCore.Mvc;
 
-namespace ServersideGameNight.Controllers
+namespace Avans.GameNight.App.Controllers
 {
     public class HomeController : Controller
     {

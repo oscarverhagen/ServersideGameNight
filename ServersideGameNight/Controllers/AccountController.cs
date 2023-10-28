@@ -9,8 +9,8 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Avans.GameNight.Infrastructure.EntityFramework.Interfaces;
 using Avans.GameNight.App.Models;
+using Avans.GameNight.Core.Domain.Interfaces;
 
 namespace Avans.GameNight.App.Controllers
 {
