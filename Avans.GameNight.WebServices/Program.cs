@@ -1,6 +1,6 @@
 
+using Avans.GameNight.Core.Domain.Interfaces;
 using Avans.GameNight.Infrastructure.EntityFramework.DataContext;
-using Avans.GameNight.Infrastructure.EntityFramework.Interfaces;
 using Avans.GameNight.Infrastructure.EntityFramework.Repository;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;

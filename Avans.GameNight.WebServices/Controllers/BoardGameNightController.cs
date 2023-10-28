@@ -1,5 +1,5 @@
-﻿using Avans.GameNight.Core.Domain.Models;
-using Avans.GameNight.Infrastructure.EntityFramework.Interfaces;
+﻿using Avans.GameNight.Core.Domain.Interfaces;
+using Avans.GameNight.Core.Domain.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 

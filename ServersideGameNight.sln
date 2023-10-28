@@ -4,6 +4,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 VisualStudioVersion = 17.1.32421.90
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Avans.GameNight.App", "ServersideGameNight\Avans.GameNight.App.csproj", "{5BC213E4-89E5-4ADA-A93B-B21494EAA134}"
+	ProjectSection(ProjectDependencies) = postProject
+		{94124E1B-5087-42DF-955B-5CE3D69F889E} = {94124E1B-5087-42DF-955B-5CE3D69F889E}
+	EndProjectSection
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Avans.GameNight.Tests", "Avans.GameNight.Tests\Avans.GameNight.Tests.csproj", "{94124E1B-5087-42DF-955B-5CE3D69F889E}"
 EndProject
@@ -13,7 +16,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Avans.GameNight.Core.Domain
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Avans.GameNight.Infrastructure.EntityFramework", "Avans.GameNight.Infrastructure.EntityFramework\Avans.GameNight.Infrastructure.EntityFramework.csproj", "{ADE6F240-88BB-4343-B6F8-1415BC652A5C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Avans.GameNight.WebServices", "Avans.GameNight.WebServices\Avans.GameNight.WebServices.csproj", "{6E8DFB29-12F8-4A8C-9309-B7C1326C6B97}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Avans.GameNight.WebServices", "Avans.GameNight.WebServices\Avans.GameNight.WebServices.csproj", "{6E8DFB29-12F8-4A8C-9309-B7C1326C6B97}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

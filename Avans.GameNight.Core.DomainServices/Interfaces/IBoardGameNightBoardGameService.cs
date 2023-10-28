@@ -9,13 +9,11 @@ namespace Avans.GameNight.Core.DomainServices.Interfaces
 {
     public interface IBoardGameNightBoardGameService
     {
-        public Task<List<BoardGameNightBoardGame>> GetBoardGameNightBoardGames();
 
         public Task<IList<BoardGameNightBoardGame>> GetBoardGameByName(string nameGame);
-        public Task AddGetBoardGameNightBoardGame(BoardGameNightBoardGame boardGame);
-        public Task UpdateGetBoardGameNightBoardGame(BoardGameNightBoardGame boardGame);
-        public Task UpdateGetBoardGameNightBoardGameByGetBoardGameNightBoardGame(string nameGame, BoardGameNightBoardGame boardGame);
-
-        public Task DestroyGetBoardGameNightBoardGame(BoardGameNightBoardGame boardGame);
+        public Task AddGameNightBoardGame(BoardGameNightBoardGame gameNightBoardGame);
+        public Task<List<BoardGameNight>> GetBoardGameNights();
+        public Task DestroyGameNightBoardGame(BoardGameNightBoardGame gameNightBoardGame);
+        public Task<List<BoardGameNightBoardGame>> GetBoardGameNightBoardGames();
     }
 }

@@ -1,5 +1,5 @@
 ﻿using Avans.GameNight.Core.Domain.Models;
-using Avans.GameNight.Infrastructure.EntityFramework.Interfaces;
+using Avans.GameNight.Core.Domain.Interfaces;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;

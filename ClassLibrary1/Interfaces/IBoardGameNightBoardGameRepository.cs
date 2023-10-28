@@ -1,21 +1,17 @@
 ﻿using Avans.GameNight.Core.Domain.Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace Avans.GameNight.Infrastructure.EntityFramework.Interfaces
+namespace Avans.GameNight.Core.Domain.Interfaces
 {
     public interface IBoardGameNightBoardGameRepository
     {
         public Task<List<BoardGameNightBoardGame>> GetBoardGameNightBoardGames();
 
-        public Task<IList<BoardGameNightBoardGame>> GETBGNByBoardGameName(string NameBoardGame);
+        public Task<IList<BoardGameNightBoardGame>> GetBoardGameByName(string NameBoardGame);
         public Task AddBoardGameNightBoardGame(BoardGameNightBoardGame boardGameNightBoardGame);
         public Task UpdateBoardGameNightBoardGame(BoardGameNightBoardGame boardGameNightBoardGame);
-        public Task UpdateBoardGameNightBoardGameByBoardGameNightBoardGame(string NameBoardGame, BoardGameNightBoardGame boardGameNightBoardGame);
+        public Task UpdateBoardGameNightBoardGameByBoardGameName(string NameBoardGame, BoardGameNightBoardGame boardGameNightBoardGame);
 
         public Task DestroyBoardGameNightBoardGame(BoardGameNightBoardGame boardGameNightBoardGame);
+        Task<List<BoardGameNight>> GetBoardGameNights();
     }
 }

@@ -1,7 +1,8 @@
 
+using Avans.GameNight.Core.Domain.Interfaces;
 using Avans.GameNight.Core.DomainServices.Interfaces;
+using Avans.GameNight.Core.DomainServices.Services;
 using Avans.GameNight.Infrastructure.EntityFramework.DataContext;
-using Avans.GameNight.Infrastructure.EntityFramework.Interfaces;
 using Avans.GameNight.Infrastructure.EntityFramework.Repository;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
@@ -17,6 +18,7 @@ builder.Services.AddScoped<IBoardGameNightPlayerRepository, BoardGameNightPlayer
 builder.Services.AddScoped<IBoardGameNightBoardGameRepository, BoardGameNightBoardGameRepository>();
 builder.Services.AddScoped<IBoardGameRepository, BoardGameRepository>();
 builder.Services.AddScoped<IPlayerRepository, PlayerRepository>();
+builder.Services.AddScoped<IBoardGameNightService, BoardGameNightService>();
 
 
 builder.Services.AddControllersWithViews();

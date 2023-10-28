@@ -7,7 +7,7 @@ using System.Linq;
 using System.Net.Mail;
 using System.Text;
 using System.Threading.Tasks;
-using Avans.GameNight.Infrastructure.EntityFramework.Interfaces;
+using Avans.GameNight.Core.Domain.Interfaces;
 
 namespace Avans.GameNight.Infrastructure.EntityFramework.Repository
 {
